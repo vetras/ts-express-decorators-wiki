@@ -1,3 +1,4 @@
+
 > Since v1.1.0 a controller are instanciated for each incoming request.
 
 ### Response and Request
@@ -14,6 +15,26 @@ interface ICalendar{
     id: string;
     name: string;
 }
+
+@Controller("/calendars")
+export class CalendarCtrl {
+
+    @Get("/:id")
+    public get(
+        @Request() request: Express.Request, 
+        @Response() response: Express.Response,
+        @Next() next: Express.NextFunction
+    ): void {
+    
+        setTimeout(() => {
+            response.send(200, {id: request.params.id, name: "test"});
+            next();
+        });
+
+    }
+}
+```
+
 ### PathParams, BodyParams, QueryParams
 
 `@PathParams` decorator provide you a quick access to an attribute `Express.request.params`.
@@ -171,21 +192,3 @@ In this example, CalendarCtrl has EventCtrl as depedencies. When all Controllers
 * /rest
 * /rest/calendars
 * /rest/calendars/events
-@Controller("/calendars")
-export class CalendarCtrl {
-
-    @Get("/:id")
-    public get(
-        @Request() request: Express.Request, 
-        @Response() response: Express.Response,
-        @Next() next: Express.NextFunction
-    ): void {
-    
-        setTimeout(() => {
-            response.send(200, {id: request.params.id, name: "test"});
-            next();
-        });
-
-    }
-}
-```
