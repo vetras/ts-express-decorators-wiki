@@ -5,7 +5,7 @@ This wiki contains informations to developp your application with decorators.
 
 * [Installation](https://github.com/Romakita/ts-express-decorators/wiki/Installation)
 * [Quick start](https://github.com/Romakita/ts-express-decorators/wiki/Quick-start)
-* [Controllers](#controllers)
+* [Controllers](https://github.com/Romakita/ts-express-decorators/wiki/Controllers)
 * [Services](#user-content-services)
 * [Authentification](#authentification)
 * [Throw HTTP exceptions](#throw-http-exceptions)
