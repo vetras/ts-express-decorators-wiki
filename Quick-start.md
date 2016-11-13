@@ -1,0 +1,152 @@
+## Quick start
+#### Create your express server
+
+TsExpressDecorators provide a `ServerLoad` class to configure your 
+express quickly. Just create a `server.ts` in your root project, declare 
+a new `Server` class that extends `ServerLoader`.
+
+```typescript
+import * as Express from "express";
+import {ServerLoader} from "ts-express-decorators";
+import Path = require("path");
+
+export class Server extends ServerLoader {
+    /**
+     * In your constructor set the global endpoint and configure the folder to scan the controllers.
+     * You can start the http and https server.
+     */
+    constructor() {
+        super();
+
+        let appPath: string = Path.resolve(__dirname);
+        
+        this.setEndpoint("/rest")                       // Declare your endpoint
+            .scan(appPath + "/controllers/**/**.js")    // Declare the directory that contains your controllers
+            .createHttpServer(8000)
+            .createHttpsServer({
+                port: 8080
+            });
+
+    }
+
+    /**
+     * This method let you configure the middleware required by your application to works.
+     * @returns {Server}
+     */
+    public importMiddlewares(): Server {
+        let morgan = require("morgan"),
+            cookieParser = require("cookie-parser"),
+            bodyParser = require("body-parser"),
+            compress = require("compression"),
+            methodOverride = require("method-override"),
+            session = require("express-session");
+
+        this
+            .use(morgan("dev"))
+            .use(ServerLoader.AcceptMime("application/json"))
+            .use(bodyParser.json())
+            .use(bodyParser.urlencoded({
+                extended: true
+            }))
+            .use(cookieParser())
+            .use(compress({}))
+            .use(methodOverride());
+
+        return this;
+    }
+
+    /**
+     * Start your server. Enjoy it !
+     * @returns {Promise<U>|Promise<TResult>}
+     */
+    static Initialize(): Promise<any> {
+
+        log.debug("Initialize server");
+
+        return new Server()
+            .start()
+            .then(() => {
+                log.debug("Server started...");
+            });
+    }
+    
+}
+
+Server.Initialize();
+```
+
+#### Create your first controller
+
+Create a new `calendarCtrl.ts` in your controllers directory configured 
+previously with `ServerLoader.scan()`. All controllers declared with `@Controller` 
+decorators is considered as an Express router. An Express router require a path 
+(here, the path is `/calendars`) to expose an url on your server. 
+More precisely, it is a part of path, and entire exposed url depend on 
+the Server configuration (see `ServerLoader.setEndpoint()`) and the controllers 
+dependencies. In this case, we haven't a dependencies and the root endpoint is set to `/rest`. 
+So the controller's url will be `http://host/rest/calendars`.
+
+```typescript
+import {Controller, Get} from "ts-express-decorators";
+import * as Express from "express";
+
+interface ICalendar{
+    id: string;
+    name: string;
+}
+
+@Controller("/calendars")
+export class CalendarCtrl {
+
+    /**
+     * Example of classic call. Use `@Get` for routing a request to your method.
+     * In this case, this route "/calendars/:id" are mounted on the "rest/" path.
+     *
+     * By default, the response is sent with status 200 and is serialized in JSON.
+     *
+     * @param request
+     * @param response
+     * @returns {{id: any, name: string}}
+     */
+    @Get("/:id")
+    public get(request: Express.Request, response: Express.Response): ICalendar {
+
+        return <ICalendar> {id: request.params.id, name: "test"};
+    }
+    
+    @Authenticated()
+    @BodyParamsRequired("calendar.name")  // Throw Bad Request (400) if the request.body.calendar.name isn't provided 
+    @Post("/")
+    public post(
+        @BodyParams("calendar") calendar: ICalendar
+    ): Promise<ICalendar> {
+    
+        return new Promise((resolve: Function, reject: Function) => {
+        
+            calendar.id = 1;
+            
+            resolve(calendar);
+            
+        });
+    }
+    
+    @Authenticated()
+    @Delete("/")
+    public post(
+        @BodyParams("calendar.id") @Required() id: string 
+    ): Promise<ICalendar> {
+    
+        return new Promise((resolve: Function, reject: Function) => {
+        
+            calendar.id = id;
+            
+            resolve(calendar);
+            
+        });
+    }
+}
+```
+
+To test your method, just run your `server.ts` and send a http request on `/rest/calendars/1`.
+
+> **Note** : Decorators `@Get` support dynamic pathParams (see `/:id`) and `RegExp` like Express API. 
