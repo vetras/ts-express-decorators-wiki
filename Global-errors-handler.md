@@ -10,8 +10,8 @@ import {ServerLoader} from "ts-express-decorators";
 import Path = require("path");
 
 export class Server extends ServerLoader {
+    // ...
 
-    
     /**
      * Customize this method to manage all errors emitted by the server and controllers.
      * @param error
