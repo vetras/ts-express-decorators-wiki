@@ -12,12 +12,36 @@ export class Server extends ServerLoader {
      * Set here your authentification strategy.
      * @param request
      * @param response
+     * @returns {boolean}
+     */
+    public isAuthenticated(request: Express.Request, response: Express.Response): boolean {
+
+        return true;
+    }
+}
+```
+
+If your strategy is asynchrone use next function like this:
+
+```typescript
+import * as Express from "express";
+import {ServerLoader} from "ts-express-decorators";
+import Path = require("path");
+
+export class Server extends ServerLoader {
+    //...
+    /**
+     * Set here your authentification strategy.
+     * @param request
+     * @param response
      * @param next
      * @returns {boolean}
      */
-    public isAuthenticated(request: Express.Request, response: Express.Response, next: Express.NextFunction): boolean {
+    public isAuthenticated(request: Express.Request, response: Express.Response, next: Express.NextFunction): void {
 
-        return true;
+        setTimeout(() => {
+            next(true);
+        });
     }
 }
 ```
