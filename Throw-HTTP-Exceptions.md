@@ -23,4 +23,4 @@ export class CalendarCtrl {
     }
 }
 ```
-If `id` paramere is not an number, the method throw a Bad Request. This will produce a response with status code 400 and "Not a number" message.
+If `id` parameter is not an number, the method throw a Bad Request. This will produce a response with status code 400 and "Not a number" message.
