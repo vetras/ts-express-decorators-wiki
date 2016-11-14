@@ -10,4 +10,4 @@ This wiki contains informations to developp your application with decorators.
 * [Authentification](#authentification)
 * [Throw HTTP exceptions](#throw-http-exceptions)
 * [Global errors handler](#global-errors-handler)
-* [Decorators references](#decorators-references)
+* [Decorators references](https://github.com/Romakita/ts-express-decorators/wiki/Decorators-references)
