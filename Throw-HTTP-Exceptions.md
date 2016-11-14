@@ -1,4 +1,4 @@
-You can use (httpexceptions)[https://github.com/Romakita/httpexceptions] or similar module to throw an http exception.
+You can use [httpexceptions](https://github.com/Romakita/httpexceptions) or similar module to throw an http exception.
 All exception are intercepted by the Global errors handler and are sent to the client browser.
 
 Here an example:
