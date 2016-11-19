@@ -119,7 +119,7 @@ Some middlewares are required to work with all decorators as follow:
 
 * `cookie-parser` are required to use `@CookieParams`,
 * `body-parser` are require to use `@BodyParams`,
-* [`method-override](https://github.com/expressjs/method-override)
+* [`method-override`](https://github.com/expressjs/method-override)
 
 Example of middlewares configuration:
 ```typescript
