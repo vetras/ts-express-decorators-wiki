@@ -1,13 +1,8 @@
-ServerLoader provider all method to instantiate an ExpressServer. ServerLoader can't be instantiated directly. You must create your own Server class inherited the ServerLoader class.
-
 > This document is available only for `TsExpressDecorators` v1.2.x on higher.
 
-It provide some features :
+ServerLoader provider all method to instantiate an ExpressServer. ServerLoader can't be instantiated directly. You must create your own Server class inherited the ServerLoader class.
 
- * Middleware settings,
- * ComponentScan: import all controllers or services under a folder,
- * GlobalErrorHandler: Error management (GlobalErrorHandler),
- * Authentification strategy.
+It let you manage lifecycle server like middlewares configuration, authentification strategy or global error interception (see [Lifecycle](#lifecycle)).
 
 ## API
 ### new ServerLoader()
@@ -15,13 +10,14 @@ It provide some features :
 Create new instance of ServerLoader. `ServerLoader` patch the [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage) to add the method `$tryAuth`.
 > For this reason, online one instance of ServerLoader can be constructed.
 
-Example:
+Then configure all folders that you want import in your `Server` with [`Server.scan()`](#serverloaderscanglobpattern-serverloader) method.
 
+Example:
 ```typescript
-import {ServerLoader, Server} from "ts-express-decorators";
+import {ServerLoader, Server, IServerLifecycle} from "ts-express-decorators";
 import Path = require("path");
 
-export class Server extends ServerLoader {
+export class Server extends ServerLoader implements IServerLifecycle {
 
     constructor() {
         super();
@@ -47,6 +43,8 @@ export class Server extends ServerLoader {
     }
 }
 ```
+
+> `IServerLifecycle` provide interface to implement quickly the right methods to hook [lifecycle's phase](#lifecycle). 
 
 #### ServerLoader.createHttpServer(port): ServerLoader
 **port**: `string|number`
