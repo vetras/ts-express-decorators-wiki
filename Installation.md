@@ -69,3 +69,4 @@ You can copy this example of package.json to develop your application:
   }
 }
 ```
+Use the command `npm start` to start you server with the Typescript auto compilation and the nodemon. Nodemon restart automatically your server when a file is modified.
