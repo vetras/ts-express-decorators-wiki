@@ -220,20 +220,38 @@ class Server extends ServerLoader implements IServerLifecycle {
 ***
 
 #### ServerLoader.$onAuth(request, response, next): void
-**request**: `Express.Request`
-**response**: `Express.Repsonse`
-**NextFunction**: `Express.NextFunction`
+* **request**: `Express.Request`
+* **response**: `Express.Repsonse`
+* **NextFunction**: `Express.NextFunction`
 
+This hook respond when an Endpoint had a decorator `@Authenticated` on this method as follow:
+```typescript
+@Controller('/mypath')
+class MyCtrl{
+   
+    @Get('/')
+    @Authenticated()
+    public getResource(){}
+}
+```
 
+By default, the decorator respond true for each incoming request. To change this, you must implement your Authentification strategy by adding your method `$onAuth` on your Server:
 
+```typescript
+class Server extends ServerLoader implements IServerLifecycle  {
+    public $onAuth(request, response, next) {
+        next(request.isAuthenticated());
+    }
+}
+```
 
 ***
 
 #### ServerLoader.$onError(error, request, response, next): void
-**error**: `Object`
-**request**: `Express.Request`
-**response**: `Express.Repsonse`
-**NextFunction**: `Express.NextFunction`
+* **error**: `Object`
+* **request**: `Express.Request`
+* **response**: `Express.Repsonse`
+* **NextFunction**: `Express.NextFunction`
 
 All errors are intercepted by the ServerLoader. By default, all 
 HTTP Exceptions are automatically sent to the client, and technical error are
