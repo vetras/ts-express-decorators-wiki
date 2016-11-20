@@ -103,17 +103,22 @@ Theses pattern scan all files in the directories `controllers`, `services` recur
 #### ServerLoader.start(): Promise
 Start the express server.
 
-### Lifecycle
-ServerLoader lifecycle let you intercept a phase.
+### Lifecycle hooks
+ServerLoader calls lifecycle hook methods to let you intercept them.
 
-Lifecycle phases:
+These hooks are as follows :
 
+* `$onInit`: This method is called when the server starting his lifecycle,
 * `$onMountingMiddlewares`: Configure all express middleware on this phase,
 * `$onReady`: Called when httpServer and/or httpsServer are ready,
 * `$onAuth`: Called when an Endpoint require an authentification strategy before access to the endpoint method,
 * `$onError`: Called when an error is intercepted by Express or TsExpressDecorators.
+* `$onServerInitError`: Called when an error is triggered on server initialization.
 
-#### ServerLoader.$onMountingMiddlewares(): void
+#### ServerLoader.$onInit(): void | Promise
+
+
+#### ServerLoader.$onMountingMiddlewares(): void | Promise
 
 Some middlewares are required to work with all decorators as follow:
 
@@ -125,17 +130,16 @@ Example of middlewares configuration:
 ```typescript
 class Server extends ServerLoader implements IServerLifecycle {
 
-    public $onMountingMiddlewares():  {
+    public $onMountingMiddlewares(app: Express.Application):  {
 
-        let morgan = require('morgan'),
+        const morgan = require('morgan'),
             cookieParser = require('cookie-parser'),
             bodyParser = require('body-parser'),
             compress = require('compression'),
             methodOverride = require('method-override'),
             session = require('express-session');
 
-        this
-            .use(morgan('dev'))
+        app.use(morgan('dev'))
             .use(ServerLoader.AcceptMime("application/json"))
             .use(bodyParser.json())
             .use(bodyParser.urlencoded({
@@ -145,16 +149,24 @@ class Server extends ServerLoader implements IServerLifecycle {
             .use(compress({}))
             .use(methodOverride());
 
-        return this;
     }
 }
 ```
 
 #### ServerLoader.$onReady(): void
 
+
 #### ServerLoader.$onAuth(request, response, next): void
+**request**: `Express.Request`
+**response**: `Express.Repsonse`
+**NextFunction**: `Express.NextFunction`
+
 
 #### ServerLoader.$onError(error, request, response, next): void
+**error**: `Object`
+**request**: `Express.Request`
+**response**: `Express.Repsonse`
+**NextFunction**: `Express.NextFunction`
 
 
 
