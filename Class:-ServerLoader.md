@@ -175,7 +175,7 @@ Example of middlewares configuration:
 ```typescript
 class Server extends ServerLoader implements IServerLifecycle {
 
-    public $onMountingMiddlewares(app: Express.Application):  {
+    public $onMountingMiddlewares(app: Express.Application): void | Promise  {
 
         const morgan = require('morgan'),
             cookieParser = require('cookie-parser'),
@@ -197,6 +197,7 @@ class Server extends ServerLoader implements IServerLifecycle {
     }
 }
 ```
+> `$onMountingMiddlewares` accept a promise to defer the next lifecycle's phase.
 
 ***
 
@@ -227,7 +228,7 @@ class Server extends ServerLoader implements IServerLifecycle {
 This hook respond when an Endpoint had a decorator `@Authenticated` on this method as follow:
 ```typescript
 @Controller('/mypath')
-class MyCtrl{
+class MyCtrl {
    
     @Get('/')
     @Authenticated()
@@ -239,7 +240,7 @@ By default, the decorator respond true for each incoming request. To change this
 
 ```typescript
 class Server extends ServerLoader implements IServerLifecycle  {
-    public $onAuth(request, response, next) {
+    public $onAuth(request, response, next): void {
         next(request.isAuthenticated());
     }
 }
