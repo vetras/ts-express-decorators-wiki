@@ -70,6 +70,14 @@ See more info on [httpsOptions](https://nodejs.org/api/tls.html#tls_tls_createse
 
 Return the current instance of [Express.Application](http://expressjs.com/fr/4x/api.html#app).
 
+#### get ServerLoader.httpServer: [Http.Server](https://nodejs.org/api/http.html#http_class_http_server)
+
+Return the current instance of [Http.Server](https://nodejs.org/api/http.html#http_class_http_server).
+
+#### get ServerLoader.httpsServer: [Https.Server](https://nodejs.org/api/https.html#https_class_https_server)
+
+Return the current instance of [Https.Server](https://nodejs.org/api/https.html#https_class_https_server).
+
 #### ServerLoader.setEndpoint(endpoint): ServerLoader
 **endpoint**: `string`
 
