@@ -109,16 +109,16 @@ ServerLoader calls lifecycle hook methods to let you intercept them.
 These hooks are as follows :
 
 * `constructor`: On this phase nothing is constructed. Express app isn't created.
-* `$onInit`: Called when the server starting his lifecycle. Is good place to initialize Database connection,
-* `$onMountingMiddlewares`: Called when Express app is created. You can configure all express middlewares on this phase,
-* `$onReady`: Called when httpServer and/or httpsServer are ready,
-* `$onAuth`: Called when an Endpoint require an authentification strategy before access to the endpoint method,
-* `$onError`: Called when an error is intercepted by Express or TsExpressDecorators.
-* `$onServerInitError`: Called when an error is triggered on server initialization.
+* `$onInit`: Respond when the server starting his lifecycle. Is good place to initialize Database connection,
+* `$onMountingMiddlewares`: Respond when Express app is created. You can configure all express middlewares on this phase,
+* `$onReady`: Respond when httpServer and/or httpsServer are ready,
+* `$onAuth`: Respond when an Endpoint require an authentification strategy before access to the endpoint method,
+* `$onError`: Respond when an error is intercepted by Express or TsExpressDecorators.
+* `$onServerInitError`: Respond when an error is triggered on server initialization.
 
 #### ServerLoader.$onInit(): void | Promise
 
-On this phase you can initialize your database connection for example. This hook accept a promise as return and let you to wait the database connection before run the next lifecycle's phase.
+During this phase you can initialize your database connection for example. This hook accept a promise as return and let you to wait the database connection before run the next lifecycle's phase.
 
 Example with mongoose Api:
 ```typescript
@@ -141,7 +141,7 @@ Some middlewares are required to work with all decorators as follow:
 
 * `cookie-parser` are required to use `@CookieParams`,
 * `body-parser` are require to use `@BodyParams`,
-* [`method-override`](https://github.com/expressjs/method-override)
+* [`method-override`](https://github.com/expressjs/method-override).
 
 Example of middlewares configuration:
 ```typescript
@@ -171,6 +171,21 @@ class Server extends ServerLoader implements IServerLifecycle {
 ```
 
 #### ServerLoader.$onReady(): void
+
+On this phase your Express is ready. All Controllers are imported and all Services is constructed.
+You can initialize other server here like a Socket server.
+
+Example:
+```typescript
+class Server extends ServerLoader implements IServerLifecycle {
+
+    public $onReady(): void {
+        console.log('Server ready');
+        const io = SocketIO(this.httpServer);
+        // ...
+    }
+}
+```
 
 
 #### ServerLoader.$onAuth(request, response, next): void
