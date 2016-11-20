@@ -108,8 +108,9 @@ ServerLoader calls lifecycle hook methods to let you intercept them.
 
 These hooks are as follows :
 
-* `$onInit`: This method is called when the server starting his lifecycle,
-* `$onMountingMiddlewares`: Configure all express middleware on this phase,
+* `constructor`: On this phase nothing is constructed. Express app isn't created.
+* `$onInit`: Called when the server starting his lifecycle. Is good place to initialize Database connection,
+* `$onMountingMiddlewares`: Called when Express app is created. You can configure all express middlewares on this phase,
 * `$onReady`: Called when httpServer and/or httpsServer are ready,
 * `$onAuth`: Called when an Endpoint require an authentification strategy before access to the endpoint method,
 * `$onError`: Called when an error is intercepted by Express or TsExpressDecorators.
@@ -117,6 +118,22 @@ These hooks are as follows :
 
 #### ServerLoader.$onInit(): void | Promise
 
+On this phase you can initialize your database connection for example. This hook accept a promise as return and let you to wait the database connection before run the next lifecycle's phase.
+
+Example with mongoose Api:
+```typescript
+class Server extends ServerLoader implements IServerLifecycle {
+
+    public $onInit(): Promise  {
+        
+        return new Promise((resolve, reject) => {
+            const db = Mongoose.connect(credentials);
+            db.once('open', resolve);
+            db.on('error', reject); // if error occurs, it will be intercepted by $onServerInitError
+        });
+    }
+}
+```
 
 #### ServerLoader.$onMountingMiddlewares(): void | Promise
 
