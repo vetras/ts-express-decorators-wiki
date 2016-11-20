@@ -2,7 +2,7 @@
 
 ServerLoader provider all method to instantiate an ExpressServer. ServerLoader can't be instantiated directly. You must create your own Server class inherited the ServerLoader class.
 
-It let you manage lifecycle server like middlewares configuration, authentification strategy or global error interception (see [Lifecycle](#lifecycle)).
+It let you manage lifecycle server like middlewares configuration, authentification strategy or global error interception (see [Lifecycle](#lifecycle-hooks)).
 
 ## API
 ### new ServerLoader()
@@ -44,12 +44,16 @@ export class Server extends ServerLoader implements IServerLifecycle {
 }
 ```
 
-> `IServerLifecycle` provide interface to implement quickly the right methods to hook [lifecycle's phase](#lifecycle). 
+> `IServerLifecycle` provide interface to implement quickly the right methods to hook [lifecycle's phase](#lifecycle-hooks). 
+
+***
 
 #### ServerLoader.createHttpServer(port): ServerLoader
 **port**: `string|number`
 
 Create a new HTTP server with the provided `port`.
+
+***
 
 #### ServerLoader.createHttpsServer(httpsOptions): ServerLoader
 **httpsOptions**: `IHTTPSServerOptions`
@@ -66,22 +70,32 @@ Create a new HTTPs server.
 
 See more info on [httpsOptions](https://nodejs.org/api/tls.html#tls_tls_createserver_options_secureconnectionlistener).
 
+***
+
 #### get ServerLoader.expressApp: [Express.Application](http://expressjs.com/fr/4x/api.html#app)
 
 Return the current instance of [Express.Application](http://expressjs.com/fr/4x/api.html#app).
+
+***
 
 #### get ServerLoader.httpServer: [Http.Server](https://nodejs.org/api/http.html#http_class_http_server)
 
 Return the current instance of [Http.Server](https://nodejs.org/api/http.html#http_class_http_server).
 
+***
+
 #### get ServerLoader.httpsServer: [Https.Server](https://nodejs.org/api/https.html#https_class_https_server)
 
 Return the current instance of [Https.Server](https://nodejs.org/api/https.html#https_class_https_server).
+
+***
 
 #### ServerLoader.setEndpoint(endpoint): ServerLoader
 **endpoint**: `string`
 
 Configure the global endpoint path for all collected controller.
+
+***
 
 #### ServerLoader.scan(globPattern): ServerLoader
 **globPattern**: `string`
@@ -108,10 +122,12 @@ export class Server extends ServerLoader {
 ```
 Theses pattern scan all files in the directories `controllers`, `services` recursively.
 
+***
+
 #### ServerLoader.start(): Promise
 Start the express server.
 
-### Lifecycle hooks
+## Lifecycle hooks
 ServerLoader calls lifecycle hook methods to let you intercept them.
 
 These hooks are as follows :
@@ -123,6 +139,8 @@ These hooks are as follows :
 * `$onAuth`: Respond when an Endpoint require an authentification strategy before access to the endpoint method,
 * `$onError`: Respond when an error is intercepted by Express or TsExpressDecorators.
 * `$onServerInitError`: Respond when an error is triggered on server initialization.
+
+***
 
 #### ServerLoader.$onInit(): void | Promise
 
@@ -142,6 +160,8 @@ class Server extends ServerLoader implements IServerLifecycle {
     }
 }
 ```
+
+***
 
 #### ServerLoader.$onMountingMiddlewares(): void | Promise
 
@@ -178,6 +198,8 @@ class Server extends ServerLoader implements IServerLifecycle {
 }
 ```
 
+***
+
 #### ServerLoader.$onReady(): void
 
 On this phase your Express is ready. All Controllers are imported and all Services is constructed.
@@ -195,12 +217,14 @@ class Server extends ServerLoader implements IServerLifecycle {
 }
 ```
 
+***
 
 #### ServerLoader.$onAuth(request, response, next): void
 **request**: `Express.Request`
 **response**: `Express.Repsonse`
 **NextFunction**: `Express.NextFunction`
 
+***
 
 #### ServerLoader.$onError(error, request, response, next): void
 **error**: `Object`
