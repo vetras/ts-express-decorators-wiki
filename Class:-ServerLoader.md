@@ -224,6 +224,9 @@ class Server extends ServerLoader implements IServerLifecycle {
 **response**: `Express.Repsonse`
 **NextFunction**: `Express.NextFunction`
 
+
+
+
 ***
 
 #### ServerLoader.$onError(error, request, response, next): void
@@ -232,7 +235,44 @@ class Server extends ServerLoader implements IServerLifecycle {
 **response**: `Express.Repsonse`
 **NextFunction**: `Express.NextFunction`
 
+All errors are intercepted by the ServerLoader. By default, all 
+HTTP Exceptions are automatically sent to the client, and technical error are
+sent as Internal Server Error. 
 
+You can change the default error management by adding your method on `$onError` hook.
+
+This example show you how the default Global Errors Handler work. Customize this hook to manage the errors: 
+```typescript
+class Server extends ServerLoader implements IServerLifecycle  {
+
+    public $onError(error: any, request: Express.Request, response: Express.Response, next: Function): void {
+
+        if (response.headersSent) {
+            return next(error);
+        }
+
+        if (typeof error === "string") {
+            response.status(404).send(error);
+            return next();
+        }
+
+        if (error instanceof Exception) {
+            response.status(error.status).send(error.message);
+            return next();
+        }
+
+        if (error.name === "CastError" || error.name === "ObjectID" || error.name === "ValidationError") {
+            response.status(400).send("Bad Request");
+            return next();
+        }
+
+        response.status(error.status || 500).send("Internal Error");
+
+        return next();
+        
+    }
+}
+```
 
 
 
