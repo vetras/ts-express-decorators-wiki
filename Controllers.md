@@ -103,7 +103,6 @@ send a response to the client.
 
 ```typescript
 import {Controller, Get, Response, Request} from "ts-express-decorators";
-import * as Promise from "bluebird";
 import * as Express from "express";
 
 interface ICalendar{
