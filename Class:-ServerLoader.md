@@ -246,7 +246,7 @@ class Server extends ServerLoader implements IServerLifecycle  {
 }
 ```
 
-See a complete integration example with [Passport.js](https://github.com/Romakita/example-ts-express-decorator/tree/master/example-passport)
+See a complete integration example with [Passport.js](https://github.com/Romakita/example-ts-express-decorator/tree/master/example-passport).
 
 ***
 
