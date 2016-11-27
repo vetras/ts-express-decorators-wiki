@@ -11,10 +11,10 @@ In first place, you must adding the `services` folder in your server settings li
  
 ```typescript
 import * as Express from "express";
-import {ServerLoader} from "ts-express-decorators";
+import {ServerLoader, IServerLifecycle} from "ts-express-decorators";
 import Path = require("path");
 
-export class Server extends ServerLoader {
+export class Server extends ServerLoader implements IServerLifecycle {
     /**
      * In your constructor set the global endpoint and configure the folder to scan the controllers.
      * You can start the http and https server.
@@ -22,7 +22,7 @@ export class Server extends ServerLoader {
     constructor() {
         super();
 
-        let appPath: string = Path.resolve(__dirname);
+        const appPath: string = Path.resolve(__dirname);
         
         this.setEndpoint("/rest")                       // Declare your endpoint
             .scan(appPath + "/controllers/**/**.js")    // Declare the directory that contains your controllers
