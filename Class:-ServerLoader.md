@@ -33,7 +33,7 @@ export class Server extends ServerLoader implements IServerLifecycle {
 
     }
 
-    static Initialize(): Bluebird<any> {
+    static Initialize(): Promise<any> {
      
         return new Server()
             .start()
