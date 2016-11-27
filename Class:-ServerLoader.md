@@ -31,16 +31,17 @@ export class Server extends ServerLoader implements IServerLifecycle {
                 port: 8080
             });
 
+    }  
+
+    $onReady(){
+        console.log('Server started...');
+    }
+    
+    $onServerInitError(err){
+        console.error(err);
     }
 
-    static Initialize(): Promise<any> {
-     
-        return new Server()
-            .start()
-            .then(() => {
-                console.log('Server started...');
-            });
-    }
+    static Initialize = (): Promise<any> => new Server().start();
 }
 ```
 
