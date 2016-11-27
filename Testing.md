@@ -3,7 +3,7 @@
 This section help you to test your service. It's highly recommended to test your application with Mocha + Chai, but you can use Jasmine or other unit test framework.
 
 ## Configuration
-In your tsconfig.json, you must add `paths` settings:
+In your `tsconfig.json`, you must add `paths` settings:
 
 ```typescript
 {
