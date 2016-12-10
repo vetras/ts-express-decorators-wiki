@@ -246,6 +246,27 @@ class Server extends ServerLoader implements IServerLifecycle  {
     }
 }
 ```
+> Note: Since 1.2.5 $onAuth hooks accept a fourth parameter named `autorization`.
+
+```typescript
+class Server extends ServerLoader implements IServerLifecycle  {
+    public $onAuth(request, response, next, authorization?: any): void {
+        next(request.isAuthenticated());
+    }
+}
+```
+Authorization parameters let you to manage some information like a role. Example:
+
+```typescript
+@Controller('/mypath')
+class MyCtrl {
+   
+    @Get('/')
+    @Authenticated({role: 'admin'})
+    public getResource(){}
+}
+```
+The object given to `@Authenticated` will be passed to `$onAuth` hook when a new request incoming on there route path and let you manage the user's role for example.
 
 See a complete integration example with [Passport.js](https://github.com/Romakita/example-ts-express-decorator/tree/master/example-passport).
 
