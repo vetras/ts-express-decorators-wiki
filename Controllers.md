@@ -5,7 +5,7 @@
 * [Header](#header)
 * [Use promise](#use-promise)
 * [Custom middleware](#custom-middleware)
-* [Controller depedencies](#controller-depedencies)
+* [Controller dependencies](#controller-dependencies)
 
 ### Response and Request
 
@@ -166,9 +166,9 @@ export class CalendarCtrl {
 
 **Note** : Middle can't use injectable service like the `CalendarCtrl.get()` method actually. 
 
-### Controller depedencies
+### Controller dependencies
 
-A controller can depend to other controllers. Depedencies let you manage each Controller as Express Router module.
+A controller can depend to other controllers. Dependencies let you manage each Controller as Express Router module.
 
 ```typescript
 
@@ -192,7 +192,7 @@ export class RestCtrl{
 }
 ```
 
-In this example, CalendarCtrl has EventCtrl as depedencies. When all Controllers are built, the recorded routes will be as follows :
+In this example, CalendarCtrl has EventCtrl as dependencies. When all Controllers are built, the recorded routes will be as follows :
 
 * /rest
 * /rest/calendars
