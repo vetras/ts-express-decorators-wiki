@@ -3,6 +3,7 @@
 * [Examples](https://github.com/Romakita/ts-express-decorators/wiki/Examples)
 * [Controllers](https://github.com/Romakita/ts-express-decorators/wiki/Controllers)
 * [Services](https://github.com/Romakita/ts-express-decorators/wiki/Services)
+* [Converters](https://github.com/Romakita/ts-express-decorators/wiki/Converters)
 * [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader)
    * [API](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader#api)
    * [Lifecycle hooks](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader#lifecycle-hooks)
