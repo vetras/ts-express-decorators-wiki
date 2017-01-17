@@ -1,4 +1,3 @@
-### Class decorators
 ## Decorators references
 ### Class decorators
 
