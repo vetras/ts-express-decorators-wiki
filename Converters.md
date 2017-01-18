@@ -187,3 +187,25 @@ export class SetConverter implements IConverter {
 ```
 
 > In this example, we use the `ConverterService` to delegate the deserialization for each item. But you can implement your own deserialization/serialization strategy.
+
+### With methods
+You can implement the deserialize and serialize method on your class to customize conversion to Plain Object JavaScript or from a POJ.
+
+Example:
+```typescript
+
+class Foo implements IConverter {
+    
+    private attr1: string;
+
+    deserialize(data: Object): void {
+         this.attr1 = data.ATTR1 || "";
+    }
+ 
+    // Called when a Date object will be serialized to POJ
+    serialize(): any {
+
+        return {ATTR1: this.attr1};
+    }
+}
+```
