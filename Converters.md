@@ -117,7 +117,7 @@ export class ArrayConverter implements IConverter {
 
 > In this example, we use the `ConverterService` to delegate the deserialization for each item. But you can implement your own deserialization/serialization strategy.
 
-#### Map converter
+##### Map converter
 ```typescript
 import {ConverterService, Converter, IConverter} from "ts-express-decorators";
 
@@ -152,7 +152,7 @@ export class MapConverter implements IConverter {
 
 > In this example, we use the `ConverterService` to delegate the deserialization for each item. But you can implement your own deserialization/serialization strategy.
 
-#### Set converter
+##### Set converter
 
 ```typescript
 import {ConverterService, Converter, IConverter} from "ts-express-decorators";
