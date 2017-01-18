@@ -33,7 +33,7 @@ Signature | Example | Description | Express analogue
 `@QueryParams(expression?: string, useClass?: any)` | `get(@QueryParams("id") id: string) {}` | Get a parameters on `Express.request.query` attribut. | `request.query.id`
 `@Session(expression?: string, useClass?: any)` | `get(@Session() context: Context) {}` | Get a parameters on `Express.request.session` attribut. | `request.session`
 `@Header(key: string)` | `get(@Header("x-token") token: string) {}` | Inject request header parameters. | `request.get('x-token')`
-`@Required()` | `get(@QueryParams("id") @Required() id: string) {} | Set a required flag on a parameter. | 
+`@Required()` | `get(@QueryParams("id") @Required() id: string) {}` | Set a required flag on a parameter. | 
 
 > Note : `useClass` parameters is only required if you want to deserialize a collection type. (See [converters page](https://github.com/Romakita/ts-express-decorators/wiki/converters)).
 
