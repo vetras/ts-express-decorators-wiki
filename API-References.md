@@ -7,6 +7,7 @@ Signature | Example | Description
 [`@Converter(...targetTypes: any[])`](https://github.com/Romakita/ts-express-decorators/wiki/Converters) | `@Service() class Service` Declare a new serializer/deserializer when a class/type is deserialized from JSON and vice versa.
 
 ### Method decorators
+
 Signature | Example | Description | Express analogue
 --- | --- | --- | ---
 `@All(route)` | `@All('/calendars') all()` | Intercept all request for a given route. | `router.all('/calendars', all)`
@@ -22,19 +23,19 @@ Signature | Example | Description | Express analogue
 
 ### Parameter Decorators
 Signature | Example | Description | Express analogue
+--- | --- | --- | ---
 `@Request()` | `get(@Request() request: Request) {}` | Inject the `Express.Request` service. | `function(request, response) {}`
 `@Response()` | `get(@Response() response: Response) {}` | Inject the `Express.Response` service. | `function(request, response) {}`
 `@Next()` | `get(@Next() response: NextFunction) {}` | Inject the `Express.NextFunction` service. | `function(request, response, next) {}`
+`@PathParams(expression?: string, useClass?: any)` | `get(@PathParam("id") id: string) {}` |  Get a parameters on `Express.request.params` attribut. | `request.params.id`
+`@BodyParams(expression?: string, useClass?: any)` | `get(@BodyParam() calendar: CalendarModel) {}` | Inject a parameters on `Express.request.body` attribut. | `request.body`
+`@CookiesParams(expression?: string, useClass?: any)` | `get(@CookiesParams("cook") cook: string) {}` | Get a parameters on `Express.request.cookies` attribut. | `request.cookies.cook`
+`@QueryParams(expression?: string, useClass?: any)` | `get(@QueryParams("id") id: string) {}` | Get a parameters on `Express.request.query` attribut. | `request.query.id`
+`@Session(expression?: string, useClass?: any)` | `get(@Session() context: Context) {}` | Get a parameters on `Express.request.session` attribut. | `request.session`
+`@Header(key: string)` | `get(@Header("x-token") token: string) {}` | Inject request header parameters. | `request.get('x-token')`
+`@Required()` | `get(@QueryParams("id") @Required() id: string) {} | Set a required flag on a parameter. | 
 
-
-
-* `@PathParams(expression?: string)`: Get a parameters on `Express.Request.params` attribut.
-* `@BodyParams(expression?: string)`: Get a parameters on `Express.Request.body` attribut.
-* `@CookiesParams(expression?: string)`: Get a parameters on `Express.Request.cookies` attribut.
-* `@QueryParams(expression?: string)`: Get a parameters on `Express.Request.query` attribut.
-* `@Session(expression?: string)`: Get a parameters on `Express.Request.query` attribut.
-* `@Header(expression: string)`: Inject request header parameters.
-* `@Required()`: Set a required flag on parameters.
+> Note : `useClass` parameters is only required if you want to deserialize a collection type. (See [converters page](https://github.com/Romakita/ts-express-decorators/wiki/converters)).
 
 ## Services
 
