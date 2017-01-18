@@ -1,3 +1,4 @@
+## Decorators
 ### Class decorators
 
 * [`@Controller(route: string, ...ctrlsNamesDependencies?: string[])`](https://github.com/Romakita/ts-express-decorators/wiki/Controllers) : Declare a new controller with his Rest path.
