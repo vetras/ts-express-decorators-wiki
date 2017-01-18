@@ -1,1 +1,1 @@
-Page moved to [API References](https://github.com/Romakita/ts-express-decorators/wiki)
+Page moved to [API References](https://github.com/Romakita/ts-express-decorators/wiki/API-references)
