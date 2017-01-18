@@ -1,3 +1,5 @@
+## IOC
+
 > Since v1.1.0, TsExpessDecorators support the service injection (IOC). 
 
 The decorator `@Service()` declare a new service can be injected in other service or controller on there `constructor()`.
@@ -70,3 +72,15 @@ class MyController {
     }
 }  
 ```
+## Services available
+
+Some services are provided by `ts-express-decorators`. Theses services are follows:
+
+Service Name | Description
+--- | ---
+[ConverterService](https://github.com/Romakita/ts-express-decorators/wiki/Converters) | This service contain all default and custom converters defined with `@Converter()`.
+RequestService | Provide methods to get header, bodyParams, queryParams, pathParams or Session data from an expression.
+ParseService | Parse an expression and get a data from an Object.
+RouteService | Get all routes collected by `ts-express-decorators`.
+
+
