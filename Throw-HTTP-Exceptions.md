@@ -1,5 +1,5 @@
 You can use [ts-httpexceptions](https://github.com/Romakita/ts-httpexceptions) or similar module to throw an http exception.
-All exception are intercepted by the Global errors handler and are sent to the client browser.
+All exception will be intercepted by the [Global Errors Handler](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader#serverloaderonerrorerror-request-response-next-void) and are sent to the client browser.
 
 Here an example:
 ```typescript
@@ -23,4 +23,4 @@ export class CalendarCtrl {
     }
 }
 ```
-If `id` parameter is not an number, the method throw a Bad Request. This will produce a response with status code 400 and "Not a number" message.
+> If `id` parameter is not an number, the method throw a Bad Request. This will produce a response with status code 400 and "Not a number" message.
