@@ -11,4 +11,4 @@
    * [Global errors handlers](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader#serverloaderonerrorerror-request-response-next-void)
 * [Throw HTTP exceptions](https://github.com/Romakita/ts-express-decorators/wiki/Throw-HTTP-Exceptions)
 * [Testing](https://github.com/Romakita/ts-express-decorators/wiki/Testing)
-* [Decorators references](https://github.com/Romakita/ts-express-decorators/wiki/Decorators-references)
+* [API references](https://github.com/Romakita/ts-express-decorators/wiki/API-references)
