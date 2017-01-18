@@ -4,11 +4,7 @@ The decorator `@JsonProperty` let you to customize serialization and deserializa
 
 All following decorators use `@JsonProperty` metadata to deserialize a Plain Object JavaScript to his Model:
 
-* `@PathParams(expression?: string)`,
-* `@BodyParams(expression?: string)`,
-* `@CookiesParams(expression?: string)`,
-* `@QueryParams(expression?: string)`,
-* `@Session(expression?: string)`.
+`@PathParams(expression?: string)`, `@BodyParams(expression?: string)`, `@CookiesParams(expression?: string)`, `@QueryParams(expression?: string)`, `@Session(expression?: string)`.
 
 ## Example
 ### Define a model:
@@ -63,9 +59,11 @@ export class EventCtrl {
 }
 ```
 ## Customize serialization/deserialization
-## With @Converter
+### With @Converter
 
 `@Converter(...targetTypes)` let you to define some converters for a certain type/Classe. It usefull for a generic conversion.
+
+#### Simple type
 Here an example to create a custom converter for the Date type:
 
 ```typescript
@@ -85,12 +83,15 @@ export class DateConverter implements IConverter {
     }
 }
 ```
-### Array converter
 
-For an array, the converter is a little more complex because we need to know the base type to use when we deserialize an Array from Plain Object JavaScript. To do that, the deserialize method have two more parameters:
+#### Collection (Array, Map, Set)
+ 
+For a collection, the converter is a little more complex because we need to know the base type to use when we deserialize an `Array`, `Map` or `Set` from Plain Object JavaScript. To do that, the deserialize method have two more parameters:
 
-* `target` parameter is equal to Array, the type given to the `@Converter(Array)`. Target parameter isn't necessary in this case, excepted if we have two or more `targetTypes` for the same class Converter.
+* `target` parameter is equal to Array, the type given to the `@Converter(Array)`. `target` parameter isn't necessary if we have only one `targetType` for a class Converter (example: `@Converter(Array, Set, Map)`). 
 * `baseType` is the type given to `@JsonProperty({use: baseType})`. It's this type that will be used.
+
+##### Array converter
 
 ```typescript
 import {ConverterService, Converter, IConverter} from "ts-express-decorators";
@@ -100,30 +101,89 @@ export class ArrayConverter implements IConverter {
 
     constructor(private converterService: ConverterService) {}
 
-    /**
-     *
-     * @param data
-     * @param target
-     * @param baseType
-     * @returns {any[]}
-     */
     deserialize<T>(data: any[], target: any, baseType?: T): T[] {
         return (data as Array<any>).map(item =>
             this.converterService.deserialize(item, baseType)
         );
     }
 
-    /**
-     *
-     * @param data
-     * @returns {any[]}
-     */
     serialize(data: any[]) {
         return (data as Array<any>).map(item =>
             this.converterService.serialize(item)
         );
     }
 }
+```
 
-In this example, we use the `ConverterService` to delegate the deserialization for each item. But you can implement your own deserialization/serialization strategy.
+> In this example, we use the `ConverterService` to delegate the deserialization for each item. But you can implement your own deserialization/serialization strategy.
 
+#### Map converter
+```typescript
+import {ConverterService, Converter, IConverter} from "ts-express-decorators";
+
+@Converter(Map)
+export class MapConverter implements IConverter {
+    constructor(private converterService: ConverterService) {}
+
+    deserialize<T>(data: any, target: any, baseType: T): Map<string, T> {
+
+        const obj = new Map<string, T>();
+
+        Object.keys(data).forEach(key  => {
+
+            obj.set(key, <T>this.converterService.deserialize(data[key], baseType));
+
+        });
+
+        return obj;
+    }
+
+    serialize<T>(data: Map<string, T>): any {
+        const obj = {};
+
+        data.forEach((value, key) =>
+            obj[key] = this.converterService.serialize(value)
+        );
+
+        return obj;
+    }
+}
+```
+
+> In this example, we use the `ConverterService` to delegate the deserialization for each item. But you can implement your own deserialization/serialization strategy.
+
+#### Set converter
+
+```typescript
+import {ConverterService, Converter, IConverter} from "ts-express-decorators";
+
+@Converter(Set)
+export class SetConverter implements IConverter {
+    constructor(private converterService: ConverterService) {}
+
+    deserialize<T>(data: any, target: any, baseType: T): Set<T> {
+        const obj = new Set<T>();
+
+        Object.keys(data).forEach(key => {
+
+            obj.add(<T>this.converterService.deserialize(data[key], baseType));
+
+        });
+
+        return obj;
+
+    }
+
+    serialize<T>(data: Set<T>): any[] {
+        const array = [];
+
+        data.forEach((value) =>
+            array.push(this.converterService.serialize(value))
+        );
+
+        return array;
+    }
+}
+```
+
+> In this example, we use the `ConverterService` to delegate the deserialization for each item. But you can implement your own deserialization/serialization strategy.
