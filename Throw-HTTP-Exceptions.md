@@ -1,10 +1,10 @@
-You can use [httpexceptions](https://github.com/Romakita/httpexceptions) or similar module to throw an http exception.
+You can use [ts-httpexceptions](https://github.com/Romakita/ts-httpexceptions) or similar module to throw an http exception.
 All exception are intercepted by the Global errors handler and are sent to the client browser.
 
 Here an example:
 ```typescript
 import {Controller, Get, PathParams} from "ts-express-decorators";
-import {BadRequest} from "httpexceptions";
+import {BadRequest} from "ts-httpexceptions";
 import * as Express from "express";
 
 @Controller("/calendars")
