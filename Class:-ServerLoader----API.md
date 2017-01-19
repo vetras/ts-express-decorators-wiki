@@ -86,6 +86,13 @@ Return the current instance of [Http.Server](https://nodejs.org/api/http.html#ht
 Return the current instance of [Https.Server](https://nodejs.org/api/https.html#https_class_https_server).
 
 ***
+#### ServerLoader.mount(endpoint, globPattern): ServerLoader
+**endpoint**: `string`
+**globPattern**: `string`
+
+Mount all controllers files that match with `globPattern` under the `endpoint`. See  [Versioning Rest API](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader-Versioning-Rest-API) for more informations.
+
+***
 
 #### ServerLoader.setEndpoint(endpoint): ServerLoader
 **endpoint**: `string`
