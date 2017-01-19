@@ -2,10 +2,10 @@
 
 ### new ServerLoader()
 
-Create new instance of ServerLoader. `ServerLoader` patch the [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage) to add the method `$tryAuth`.
-> For this reason, online one instance of ServerLoader can be constructed.
+Create new instance of [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader). [`ServerLoader`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader) patch the [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage) to add the method `$tryAuth`.
+> For this reason, online one instance of [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader) can be constructed.
 
-Then configure all folders that you want import in your `Server` with [`Server.scan()`](#serverloaderscanglobpattern-serverloader) method.
+Then configure all folders that you want import in your `Server` with [`ServerLoader.scan()`](#serverloaderscanglobpattern-serverloader) method.
 
 Example:
 ```typescript
@@ -40,7 +40,7 @@ export class Server extends ServerLoader implements IServerLifecycle {
 }
 ```
 
-> `IServerLifecycle` provide interface to implement quickly the right methods to hook [lifecycle's phase](#lifecycle-hooks). 
+> `IServerLifecycle` provide interface to implement quickly the right methods to hook [lifecycle's phase](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader---Lifecycle-Hooks). 
 
 ***
 

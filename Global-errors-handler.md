@@ -1,4 +1,7 @@
-All errors are intercepted by the ServerLoader class. By default, all 
+[Home](https://github.com/Romakita/ts-express-decorators/wiki) > Global Errors Handler
+
+
+All errors are intercepted by the [ServerLoader]() class. By default, all 
 HTTP Exceptions are automatically sent to the client, and technical error are
 sent as Internal Server Error. 
 
@@ -19,7 +22,7 @@ export class Server extends ServerLoader {
      * @param response
      * @param next
      */
-    public onError(error: any, request: Express.Request, response: Express.Response, next: Function): void {
+    public $onError(error: any, request: Express.Request, response: Express.Response, next: Function): void {
 
         console.error(error);
 

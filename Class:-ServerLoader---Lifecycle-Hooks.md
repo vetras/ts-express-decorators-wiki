@@ -1,6 +1,6 @@
 [Home](https://github.com/Romakita/ts-express-decorators/wiki) > [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader) > Lifecycle Hooks
 
-ServerLoader calls lifecycle hook methods to let you intercept them. These hooks are as follows :
+[ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader) calls lifecycle hook methods to let you intercept them. These hooks are as follows :
 
 Hook method | Description | 
 --- | --- | ---
@@ -149,7 +149,7 @@ See a complete integration example with [Passport.js](https://github.com/Romakit
 * **response**: `Express.Repsonse`
 * **NextFunction**: `Express.NextFunction`
 
-All errors are intercepted by the ServerLoader. By default, all 
+All errors are intercepted by the [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader). By default, all 
 HTTP Exceptions are automatically sent to the client, and technical error are
 sent as Internal Server Error. 
 

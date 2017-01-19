@@ -1,4 +1,4 @@
-The annotation `@Authentification` use a `ServerLoader.isAuthenticated()` method to check the authentification strategy.
+The annotation `@Authentification` use a [`ServerLoader.$onAuth()`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader---Lifecycle-Hooks#serverloaderonauthrequest-response-next-void) method to check the authentification strategy.
 You can configure this method by adding an `isAuthenticated()` method on your `Server` class.
 
 ```typescript

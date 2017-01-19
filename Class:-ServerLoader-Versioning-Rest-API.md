@@ -2,7 +2,8 @@
 
 > This feature is available only for TsExpressDecorators v1.3.x on higher.
 
-TsExpressDecorator provide the possibility to mount multiple Rest path instead of the default path `/rest` that is settled with method `ServerLoader.setEndpoint('/rest')`. TsExpressDecorators v1.3.x introduce the new method `ServerLoader.mount(endpoint, controllersDir)` and let you to versioning your REST API like this:
+TsExpressDecorator provide the possibility to mount multiple Rest path instead of the default path `/rest` that is settled with method [`ServerLoader.setEndpoint('/rest')`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader----API#serverloadersetendpointendpoint-serverloader). 
+TsExpressDecorators v1.3.x introduce the new method `ServerLoader.mount(endpoint, controllersDir)` and let you to versioning your REST API like this:
 
 ```typescript
 import * as Express from "express";
