@@ -1,3 +1,5 @@
+[Home](https://github.com/Romakita/ts-express-decorators/wiki) > Installation
+
 You can get the latest release using npm:
 
 ```batch
