@@ -1,5 +1,5 @@
 
-> This document is available only for `TsExpressDecorators` v1.2.x on higher.
+> This documentation is available only for `TsExpressDecorators` v1.2.x on higher.
 
 ServerLoader provider all method to instantiate an ExpressServer. ServerLoader can't be instantiated directly. You must create your own Server class inherited the ServerLoader class.
 
