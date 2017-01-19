@@ -90,7 +90,7 @@ Return the current instance of [Https.Server](https://nodejs.org/api/https.html#
 **endpoint**: `string`
 **globPattern**: `string`
 
-Mount all controllers files that match with `globPattern` under the `endpoint`. See  [Versioning Rest API](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader-Versioning-Rest-API) for more informations.
+Mount all controllers files that match with `globPattern` ([Glob Pattern](https://www.npmjs.com/package/glob)) under the `endpoint`. See  [Versioning Rest API](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader-Versioning-Rest-API) for more informations.
 
 ***
 
