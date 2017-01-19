@@ -1,4 +1,4 @@
-## Quick start
+
 #### Create your express server
 
 TsExpressDecorators provide a `ServerLoad` class to configure your 
