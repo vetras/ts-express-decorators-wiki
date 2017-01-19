@@ -1,7 +1,5 @@
 [Home](https://github.com/Romakita/ts-express-decorators/wiki) > [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader) > Versioning Rest API
 
-## Versioning Rest API
-
 > This feature is available only for TsExpressDecorators v1.3.x on higher.
 
 TsExpressDecorator provide the possibility to mount multiple Rest path instead of the default path `/rest` that is settled with method `ServerLoader.setEndpoint('/rest')`. TsExpressDecorators v1.3.x introduce the new method `ServerLoader.mount(endpoint, controllersDir)` and let you to versioning your REST API like these:
