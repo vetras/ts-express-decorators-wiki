@@ -1,4 +1,8 @@
-[< ServerLoader menu](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader)
+Home > [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader) > Lifecycle Hooks
+
+***
+
+## Lifecycle hooks
 
 ServerLoader calls lifecycle hook methods to let you intercept them.
 
