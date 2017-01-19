@@ -1,16 +1,16 @@
 [Home](https://github.com/Romakita/ts-express-decorators/wiki) > [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader) > Lifecycle Hooks
 
-ServerLoader calls lifecycle hook methods to let you intercept them.
+ServerLoader calls lifecycle hook methods to let you intercept them. These hooks are as follows :
 
-These hooks are as follows :
-
-* `constructor`: On this phase nothing is constructed. Express app isn't created.
-* `$onInit`: Respond when the server starting his lifecycle. Is good place to initialize Database connection,
-* `$onMountingMiddlewares`: Respond when Express app is created. You can configure all express middlewares on this phase,
-* `$onReady`: Respond when httpServer and/or httpsServer are ready,
-* `$onAuth`: Respond when an Endpoint require an authentification strategy before access to the endpoint method,
-* `$onError`: Respond when an error is intercepted by Express or TsExpressDecorators.
-* `$onServerInitError`: Respond when an error is triggered on server initialization.
+Hook method | Description | 
+--- | --- | ---
+`constructor` | On this phase nothing is constructed. Express app isn't created. | 
+`$onInit` | Respond when the server starting his lifecycle. Is good place to initialize Database connection. | [see](#serverloaderoninit-void--promise)
+`$onMountingMiddlewares` | Respond when Express app is created. You can configure all express middlewares on this phase. | [see](#serverloaderonmountingmiddlewares-void--promise)
+`$onReady` | Respond when httpServer and/or httpsServer are ready. | [see](#serverloaderonready-void)
+`$onAuth` | Respond when an Endpoint require an authentification strategy before access to the endpoint method. | [see](#serverloaderonauthrequest-response-next-void)
+`$onError` | Respond when an error is intercepted by Express or TsExpressDecorators. | [see](#serverloaderonerrorerror-request-response-next-void)
+`$onServerInitError` | Respond when an error is triggered on server initialization. | 
 
 ***
 
