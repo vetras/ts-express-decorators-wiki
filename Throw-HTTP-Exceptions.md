@@ -1,3 +1,5 @@
+[Home](https://github.com/Romakita/ts-express-decorators/wiki) > Throw HTTP Exceptions
+
 You can use [ts-httpexceptions](https://github.com/Romakita/ts-httpexceptions) or similar module to throw an http exception.
 All exception will be intercepted by the [Global Errors Handler](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader#serverloaderonerrorerror-request-response-next-void) and are sent to the client browser.
 
