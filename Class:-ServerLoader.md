@@ -3,7 +3,7 @@
 
 ServerLoader provider all method to instantiate an ExpressServer. ServerLoader can't be instantiated directly. You must create your own Server class inherited the ServerLoader class.
 
-It let you manage lifecycle server like middlewares configuration, authentification strategy or global error interception (see [Lifecycle](#lifecycle-hooks)).
+It let you manage lifecycle server like middlewares configuration, authentification strategy or global error interception (see [Lifecycle](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader---Lifecycle-Hooks)).
 
 ## Menu
 
