@@ -8,7 +8,7 @@ This wiki contains informations to developp your application with decorators, to
 * [Services](https://github.com/Romakita/ts-express-decorators/wiki/Services)
 * [Converters](https://github.com/Romakita/ts-express-decorators/wiki/Converters)
 * [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader)
-   * [API](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader#api)
+   * [API](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader----API)
    * Versionning Rest API
    * [Lifecycle hooks](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader#lifecycle-hooks)
    * [Authentification](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader#serverloaderonauthrequest-response-next-void)
