@@ -6,8 +6,8 @@ Hook method | Description | 
 --- | --- | ---
 `constructor` | On this phase nothing is constructed. Express app isn't created. | 
 `$onInit` | Respond when the server starting his lifecycle. Is good place to initialize Database connection. | [see](#serverloaderoninit-void--promise)
-`$onMountingMiddlewares` | Respond when Express app is created. It will be triggered before the build of [Controllers](https://github.com/Romakita/ts-express-decorators/wiki/Controllers) and [Services](https://github.com/Romakita/ts-express-decorators/wiki/Services). You can configure all express middlewares on this phase. | [see](#serverloaderonmountingmiddlewares-void--promise)
-`$afterRoutesInit` | Respond just after all [Controllers](https://github.com/Romakita/ts-express-decorators/wiki/Controllers) and [Services](https://github.com/Romakita/ts-express-decorators/wiki/Services) are built and [`$onMoutingMiddlewares`](#serverloaderonmountingmiddlewares-void--promise). You can configure the [`serve-static`](https://github.com/expressjs/serve-static) middleware on this phase. | [see](#serverloaderafterroutesinit-void--promise)
+`$onMountingMiddlewares` | Respond when Express app is created. It will be triggered before the build of [Controllers](https://github.com/Romakita/ts-express-decorators/wiki/Controllers).  [Services](https://github.com/Romakita/ts-express-decorators/wiki/Services) are allready loaded. You can configure all express middlewares on this phase. | [see](#serverloaderonmountingmiddlewares-void--promise)
+`$afterRoutesInit` | Respond just after all [Controllers](https://github.com/Romakita/ts-express-decorators/wiki/Controllers) are built and [`$onMoutingMiddlewares`](#serverloaderonmountingmiddlewares-void--promise). You can configure the [`serve-static`](https://github.com/expressjs/serve-static) middleware on this phase. | [see](#serverloaderafterroutesinit-void--promise)
 `$onReady` | Respond when httpServer and/or httpsServer are ready. | [see](#serverloaderonready-void)
 `$onAuth` | Respond when an Endpoint require an authentification strategy before access to the endpoint method. | [see](#serverloaderonauthrequest-response-next-void)
 `$onError` | Respond when an error is intercepted by Express or TsExpressDecorators. | [see](#serverloaderonerrorerror-request-response-next-void)
@@ -44,6 +44,8 @@ Some middlewares are required to work with all decorators as follow:
 * `body-parser` are require to use `@BodyParams`,
 * [`method-override`](https://github.com/expressjs/method-override).
 
+At this step, [Services](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader----API#serverloaderscanglobpattern-serverloader) are built.
+
 Example of middlewares configuration:
 ```typescript
 class Server extends ServerLoader implements IServerLifecycle {
@@ -77,7 +79,7 @@ class Server extends ServerLoader implements IServerLifecycle {
 #### ServerLoader.$afterRoutesInit(): void | Promise
 > This hooks is available since v1.3.x
 
-This hook will be called after all the routes are collected by [`ServerLoader.mount()`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader----API#serverloadermountendpoint-globpattern-serverloader) or [`ServerLoader.scan()`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader----API#serverloadermountendpoint-globpattern-serverloader). When all routes are collected, [ServerLoader]() build the [Controllers](https://github.com/Romakita/ts-express-decorators/wiki/Controllers) and [Services](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader----API#serverloaderscanglobpattern-serverloader) then ServerLoader mount each route to the ExpressApp. 
+This hook will be called after all the routes are collected by [`ServerLoader.mount()`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader----API#serverloadermountendpoint-globpattern-serverloader) or [`ServerLoader.scan()`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader----API#serverloadermountendpoint-globpattern-serverloader). When all routes are collected, ServerLoader build the [Controllers](https://github.com/Romakita/ts-express-decorators/wiki/Controllers) then ServerLoader mount each route to the ExpressApp. 
 
 This hook is the right place to add middleware like [`serve-static`](https://github.com/expressjs/serve-static) before the [Global Handlers Error](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader---Lifecycle-Hooks#serverloaderonerrorerror-request-response-next-void). Example: 
 ```typescript
