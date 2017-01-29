@@ -15,6 +15,12 @@ Then to use the tools to test your service/controller you need to add these line
 ```json
 {
   "compilerOptions":{
+    "baseUrl":".",
+    "types": [
+      "reflect-metadata",
+      "mocha",
+      "chai"
+    ],
     "paths":{
       "ts-express-decorators/testing": [
         "node_modules/ts-express-decorators/dts/testing",
