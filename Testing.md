@@ -36,7 +36,7 @@ Example of unit test for the `ParseService`:
 ```typescript
 import {expect} from "chai";
 import {inject} from "ts-express-decorators/testing";
-import ParseService from "../src/services/parse";
+import ParseService from "ts-express-decorators";
 
 describe('ParseService :', () => {
 
