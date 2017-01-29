@@ -3,7 +3,7 @@
 You can get the latest release using npm:
 
 ```batch
-$ npm install --save ts-express-decorators express@4
+$ npm install --save ts-express-decorators express@4 @types/express
 ```
 
 > **Important!** TsExpressDecorators requires Node >= 4, Express >= 4, TypeScript >= 2.0 and 
