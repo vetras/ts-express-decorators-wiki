@@ -22,10 +22,11 @@ Then to use the tools to test your service/controller you need to add these line
   }
 }
 ```
+
 With this configuration, you will be able to use the import of the test module:
 ```typescript
 import {inject} from "ts-express-decorators/testing";
-``
+```
 ## Testing services
 
 TsExpressDecorators are bundled with a testing module `ts-express-decorators/testing`. This module provide a function `inject()` to inject your services collected via annotation `@Service()`
