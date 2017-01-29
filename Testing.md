@@ -11,7 +11,7 @@ Install the latest version of Mocha and Chai:
 ```typescript
 npm install --save-dev mocha chai @types/mocha @types/chai
 ```
-Then to use the tools to test your service/controller you need to add these line in your `tsconfig.json`:
+Then to use the tools to test your service/controller you need to add these lines in your `tsconfig.json`:
 ```json
 {
   "paths":{
