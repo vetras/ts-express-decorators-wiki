@@ -4,6 +4,28 @@
 
 This section help you to test your service. It's highly recommended to test your application with Mocha + Chai, but you can use Jasmine or other unit test framework.
 
+## Installation
+
+Install the latest version of Mocha and Chai:
+
+```typescript
+npm install --save-dev mocha chai @types/mocha @types/chai
+```
+Then to use the tools to test your service/controller you need to add these line in your `tsconfig.json`:
+```json
+{
+  "paths":{
+    "ts-express-decorators/testing": [
+      "node_modules/ts-express-decorators/dts/testing",
+      "node_modules/ts-express-decorators/lib/testing"
+    ]
+  }
+}
+```
+With this configuration, you will be able to use the import of the test module:
+```typescript
+import {inject} from "ts-express-decorators/testing";
+``
 ## Testing services
 
 TsExpressDecorators are bundled with a testing module `ts-express-decorators/testing`. This module provide a function `inject()` to inject your services collected via annotation `@Service()`
