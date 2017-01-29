@@ -14,11 +14,13 @@ npm install --save-dev mocha chai @types/mocha @types/chai
 Then to use the tools to test your service/controller you need to add these lines in your `tsconfig.json`:
 ```json
 {
-  "paths":{
-    "ts-express-decorators/testing": [
-      "node_modules/ts-express-decorators/dts/testing",
-      "node_modules/ts-express-decorators/lib/testing"
-    ]
+  "compilerOptions":{
+    "paths":{
+      "ts-express-decorators/testing": [
+        "node_modules/ts-express-decorators/dts/testing",
+        "node_modules/ts-express-decorators/lib/testing"
+      ]
+    }
   }
 }
 ```
