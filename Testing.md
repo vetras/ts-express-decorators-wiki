@@ -29,7 +29,7 @@ import {inject} from "ts-express-decorators/testing";
 ```
 ## Testing services
 
-TsExpressDecorators are bundled with a testing module `ts-express-decorators/testing`. This module provide a function `inject()` to inject your services collected via annotation `@Service()`
+TsExpressDecorators are bundled with a testing module `ts-express-decorators/testing`. This module provide a function `inject()` to inject your services collected via annotation `@Service()`.
 
 Example of unit test for the `ParseService`:
 
