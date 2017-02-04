@@ -30,7 +30,7 @@ Then to use the tools to test your service/controller you need to add these line
   }
 }
 ```
-> Since 1.4.7 isn't necessary.
+> Since 1.4.0-7 isn't necessary.
 
 With this configuration, you will be able to use the import of the test module:
 ```typescript
