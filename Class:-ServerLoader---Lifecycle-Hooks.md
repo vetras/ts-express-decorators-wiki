@@ -88,7 +88,7 @@ class Server extends ServerLoader implements IServerLifecycle {
     public $afterRoutesInit(){
         const serveStatic =   require('serve-static');
 
-        this.app.use(serveStatic('webapp'));
+        this.use(serveStatic('webapp'));
     }
 }
 ```
