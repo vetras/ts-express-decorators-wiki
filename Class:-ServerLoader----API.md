@@ -19,8 +19,7 @@ export class Server extends ServerLoader implements IServerLifecycle {
 
         let appPath = Path.resolve(__dirname);
         
-        this.setEndpoint('/rest')
-            .scan(appPath + "/controllers/**/**.js")
+        this.mount('/rest', appPath + "/controllers/**/**.js")
             .createHttpServer(8000)
             .createHttpsServer({
                 port: 8080
