@@ -1,4 +1,4 @@
-> Since v1.4.0, TsExpessDecorators support file uploading with Multer
+> Since v1.4.x, TsExpessDecorators support file uploading with Multer
 
 ### Installation
 
