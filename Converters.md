@@ -38,7 +38,7 @@ class TaskModel {
 > Map will be serialized as an object and Set as an array.
 > By default `Date`, `Array`, `Map` and `Set` have a default custom `Converter` allready embded. But you can override theses (see next part).
 
-For the `Array`, you must  add the '{use: baseType}' option to the decorator. TypeClass will be used to deserialize each item in the collection stored on the attribut source.
+For the `Array`, you must  add the `{use: baseType}` option to the decorator. TypeClass will be used to deserialize each item in the collection stored on the attribut source.
 
 ### Use your model on a Controller:
 
