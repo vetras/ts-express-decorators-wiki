@@ -6,6 +6,67 @@ TsExpressDecorators provide a `ServerLoad` class to configure your
 express quickly. Just create a `server.ts` in your root project, declare 
 a new `Server` class that extends [`ServerLoader`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader).
 
+##### Version 1.4.x (with decorator)
+> Since v1.4.x you can use the decorator `@ServerSettings` to configure the server.
+
+```typescript
+import * as Express from "express";
+import {ServerLoader, ServerSettings} from "ts-express-decorators";
+import Path = require("path");
+
+@ServerSettings({
+   rootDir: Path.resolve(__dirname)
+})
+export class Server extends ServerLoader {
+    /**
+     * This method let you configure the middleware required by your application to works.
+     * @returns {Server}
+     */
+    $onMountingMiddlewares(): void|Promise<any> {
+    
+        const morgan = require('morgan'),
+            cookieParser = require('cookie-parser'),
+            bodyParser = require('body-parser'),
+            compress = require('compression'),
+            methodOverride = require('method-override');
+
+
+        this
+            .use(morgan('dev'))
+            .use(ServerLoader.AcceptMime("application/json"))
+
+            .use(cookieParser())
+            .use(compress({}))
+            .use(methodOverride())
+            .use(bodyParser.json())
+            .use(bodyParser.urlencoded({
+                extended: true
+            }));
+
+        return null;
+    }
+
+    public $onReady(){
+        console.log('Server started...');
+    }
+   
+    public $onServerInitError(err){
+        console.error(err);
+    }
+
+    static Initialize = (): Promise<any> => new Server().start();
+}
+
+Server.Initialize();
+```
+> By default ServerLoader load controllers in `${rootDir}/controllers` and mount it to `/rest` endpoint.
+
+To customize the server settings see [Configure server with decorator](https://github.com/Romakita/ts-express-decorators/wiki/configure-server-with-decorator).
+
+#### All versions (with methods)
+
+These example is available for all version and use ServerLoader API to configure the server.
+
 ```typescript
 import * as Express from "express";
 import {ServerLoader, IServerLifecycle} from "ts-express-decorators";
@@ -71,6 +132,7 @@ export class Server extends ServerLoader implements IServerLifecycle {
 
 Server.Initialize();
 ```
+> Note: Since v1.4.0 implements `IServerLifeCycle` isn't necessary. `ServerLoader` implements already this interface.
 
 #### Create your first controller
 
