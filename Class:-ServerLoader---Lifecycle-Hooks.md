@@ -81,7 +81,10 @@ class Server extends ServerLoader implements IServerLifecycle {
 
 This hook will be called after all the routes are collected by [`ServerLoader.mount()`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader----API#serverloadermountendpoint-globpattern-serverloader) or [`ServerLoader.scan()`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader----API#serverloadermountendpoint-globpattern-serverloader). When all routes are collected, ServerLoader build the [Controllers](https://github.com/Romakita/ts-express-decorators/wiki/Controllers) then ServerLoader mount each route to the ExpressApp. 
 
-This hook is the right place to add middleware like [`serve-static`](https://github.com/expressjs/serve-static) before the [Global Handlers Error](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader---Lifecycle-Hooks#serverloaderonerrorerror-request-response-next-void). Example: 
+This hook is the right place to add middleware like [`serve-static`](https://github.com/expressjs/serve-static) before the [Global Handlers Error](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader---Lifecycle-Hooks#serverloaderonerrorerror-request-response-next-void). 
+
+##### With API
+> This decorator is available since v1.4.x
 ```typescript
 class Server extends ServerLoader implements IServerLifecycle {
 
@@ -92,6 +95,18 @@ class Server extends ServerLoader implements IServerLifecycle {
     }
 }
 ```
+##### With @ServerSettings decorator
+```typescript
+@ServerSettings({
+   serveStatic: {
+      "/": "${rootDir}/webapp"
+   }
+})
+export class Server extends ServerLoader {
+
+}
+```
+> Note: serveStatic attributs supports multiple directories.
 
 ***
 
