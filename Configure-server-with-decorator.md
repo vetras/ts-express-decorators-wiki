@@ -1,3 +1,5 @@
+[Home](https://github.com/Romakita/ts-express-decorators/wiki) > [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader) > Configure server with decorator
+
 > Since v1.4.x you can use the decorator `@ServerSettings` to configure the server.
 
 `@ServerSettings` let you to configure quickly your server via decorator. This decorator take your configuration and merge it with the default server configuration.
