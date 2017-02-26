@@ -41,6 +41,28 @@ export class Server extends ServerLoader implements IServerLifecycle {
 
 > `IServerLifecycle` provide interface to implement quickly the right methods to hook [lifecycle's phase](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader---Lifecycle-Hooks). 
 
+Since v1.4.0 you can use the [@ServerSettings()] decorators to configure your server. Here the same configuration with the decorator:
+
+```typescript
+import * as Express from "express";
+import {ServerLoader, ServerSettings} from "ts-express-decorators";
+import Path = require("path");
+
+@ServerSettings({
+   rootDir: Path.resolve(__dirname),
+   port: 8000,
+   httpsPort: 8080,
+   mount: {
+     "/rest": "${rootDir}/controllers/**/*.js"
+   }
+})
+export class Server extends ServerLoader {
+    static Initialize = (): Promise<any> => new Server().start();
+}
+
+Server.Initialize();
+```
+
 ***
 
 #### ServerLoader.createHttpServer(port): ServerLoader
