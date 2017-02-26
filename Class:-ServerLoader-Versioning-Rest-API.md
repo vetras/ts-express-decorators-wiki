@@ -4,7 +4,7 @@
 
 ### With @ServerSettings decorator
 
-Since v1.4.x you can use @ServerSettings to versionning your Rest API:
+Since v1.4.x you can use [@ServerSettings](https://github.com/Romakita/ts-express-decorators/wiki/Configure-server-with-decorator) to versionning your Rest API:
 ```typescript
 import * as Express from "express";
 import {ServerLoader, ServerSettings} from "ts-express-decorators";
