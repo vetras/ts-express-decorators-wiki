@@ -41,7 +41,7 @@ export class Server extends ServerLoader implements IServerLifecycle {
 
 > `IServerLifecycle` provide interface to implement quickly the right methods to hook [lifecycle's phase](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader---Lifecycle-Hooks). 
 
-Since v1.4.0 you can use the [@ServerSettings()] decorators to configure your server. Here the same configuration with the decorator:
+Since v1.4.0 you can use the [@ServerSettings()](https://github.com/Romakita/ts-express-decorators/wiki/Configure-server-with-decorator) decorators to configure your server. Here the same configuration with the decorator:
 
 ```typescript
 import * as Express from "express";
