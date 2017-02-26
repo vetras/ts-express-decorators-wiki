@@ -4,9 +4,12 @@
 ### Class decorators
 Signature | Example | Description
 --- | --- | ---
+[`@ServerSettings(settings: IServerSettings)`](https://github.com/Romakita/ts-express-decorators/wiki/Configure-server-with-decorator) | `@ServerSettings(options) class Server extends ServerLoader` | Configure your Server with decorators.
 [`@Controller(route: string, ...ctrlsNamesDependencies?: string[])`](https://github.com/Romakita/ts-express-decorators/wiki/Controllers) | `@Controller('/rest/calendars') class MyController` | Declare a new controller with his Rest path. His methods annotated will be collected to build the routing list. This routing listing will be built with the `express.Router` object.
 [`@Service()`](https://github.com/Romakita/ts-express-decorators/wiki/Services) |  `@Service() class Service` | Declare a new Service that can be injected in other `Service` or `Controller`.
-[`@Converter(...targetTypes: any[])`](https://github.com/Romakita/ts-express-decorators/wiki/Converters) | `@Service() class Service` Declare a new serializer/deserializer when a class/type is deserialized from JSON and vice versa.
+[`@Converter(...targetTypes: any[])`](https://github.com/Romakita/ts-express-decorators/wiki/Converters) | `@Converter() class CustomeConverter` | Declare a new serializer/deserializer when a class/type is deserialized from JSON and vice versa.
+[`@Middleware()`](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares) | `@MyMiddleware() class Middleware` | Declare a new Middleware that can used with other method decorator or in the ServerLoader as global Middleware. 
+[`@MiddlewareError()`](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares) | `@MiddlewareError() class MyMiddlewareError` | Declare a new MiddlewareError that can used with other method decorator or in the ServerLoader as global MiddlewareError. 
 
 ### Method decorators
 
