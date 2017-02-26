@@ -5,6 +5,7 @@
 * [Services](https://github.com/Romakita/ts-express-decorators/wiki/Services)
 * [Converters](https://github.com/Romakita/ts-express-decorators/wiki/Converters)
 * [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader)
+  * [Configure server with decorator](https://github.com/Romakita/ts-express-decorators/wiki/Configure-server-with-decorator)
   * [API](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader----API)
   * [Versioning Rest API](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader-Versioning-Rest-API)
   * [Lifecycle hooks](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader---Lifecycle-Hooks)
