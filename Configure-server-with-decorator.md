@@ -15,9 +15,9 @@ The default configuration is as follow:
     "/rest": "${rootDir}/controllers/**/*.js"
   },
   "componentsScan": [
-    '${rootDir}/middlewares/**/*.js',
-    '${rootDir}/services/**/*.js',
-    '${rootDir}/converters/**/*.js'
+    "${rootDir}/middlewares/**/*.js",
+    "${rootDir}/services/**/*.js",
+    "${rootDir}/converters/**/*.js"
   ]
 }
 ```
