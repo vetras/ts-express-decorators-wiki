@@ -22,7 +22,7 @@ export class Server extends ServerLoader implements IServerLifecycle {
     constructor() {
         super();
 
-        this.serverSettings.uploadDir = `${appPath}/custom-dir`;
+        this.settings.uploadDir = `${appPath}/custom-dir`;
 
         this
             .mount('/rest', `${appPath}/controllers/**/**.js`)
