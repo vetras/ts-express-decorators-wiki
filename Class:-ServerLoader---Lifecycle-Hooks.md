@@ -84,7 +84,7 @@ This hook will be called after all the routes are collected by [`ServerLoader.mo
 This hook is the right place to add middleware like [`serve-static`](https://github.com/expressjs/serve-static) before the [Global Handlers Error](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader---Lifecycle-Hooks#serverloaderonerrorerror-request-response-next-void). 
 
 ##### With API
-> This decorator is available since v1.4.x
+
 ```typescript
 class Server extends ServerLoader implements IServerLifecycle {
 
@@ -96,6 +96,9 @@ class Server extends ServerLoader implements IServerLifecycle {
 }
 ```
 ##### With @ServerSettings decorator
+
+> This decorator is available since v1.4.x
+
 ```typescript
 @ServerSettings({
    serveStatic: {
