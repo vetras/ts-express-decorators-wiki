@@ -23,8 +23,15 @@ Signature | Example | Description | Express analogue
 `@Head(route)` | `@Head('/calendars') head()` | Intercept request with HEAD Http verb for a given route. | `router.head('/calendars', head)`
 `@Patch(route)` | `@Patch('/calendars') patch()` | Intercept request with PATCH Http verb for a given route. | `router.patch('/calendars', patch)`
 `@Use(...middlewares: any[])` | `@Use(middleware) method()` |  Set a custom middleware or custom Http method. | `router.use(middleware, method)` 
+`@UseBefore(...middlewares: any[])` | `@UseBefore(middleware) method()` |  Set a middleware. This middleware are called before the class method. | `router.use(middleware, method)` 
+`@UseAfter(...middlewares: any[])` | `@UseAfter(middleware) method()` |  Set a middleware. This middleware are called after the class method. | `router.use(middleware, method)` 
 `@Authenticated(options?)` | `@Autenthicated() @Get('/calendars') get()` | Call the `Server.isAuthenticated` method to check if the user is authenticated. | `router.get('/calendars', authenticatedMiddleware, get)`
-`@ResponseView(viewPath: string, options: any)` | `@get('/calendars') @ResponseView('calendars.html') patch()` | Render `viewPath` file using the method return data.
+`@ResponseView(viewPath: string, options: any)` | `@Get('/calendars') @ResponseView('calendars.html') patch()` | Render `viewPath` file using the method return data.
+`@Render(viewPath: string, options: any)` | `@Get('/calendars') @Render('calendars.html') patch()` | Render `viewPath` file using the method return data.
+`@ContentType()` | `@Get('/calendars') @ContentType('text/xml') myMethod()` | Sets the Content-Type HTTP header to the MIME type as determined by `mime.lookup()` for the specified type. If type contains the “/” character, then it sets the `Content-Type` to type. | `response.type('text/xml')`
+`@Location()` | `@Get('/calendars') @Location('/docs/page.html') myMethod()` | Sets the response Location HTTP header to the specified path parameter. | `response.location('/doc/page.html')` 
+`@Redirect()` | `@Get('/calendars') @Redirect('/docs/page.html') myMethod()` | Redirects to the URL derived from the specified path, with specified status, a positive integer that corresponds to an HTTP status code . If not specified, status defaults to “302 “Found”. | `response.redirect('/doc/page.html')` 
+`@Inject()` | `@Inject() myMethod(service1: Service1)` | Inject services in parameters for the class method.
 
 ### Parameter Decorators
 Signature | Example | Description | Express analogue
