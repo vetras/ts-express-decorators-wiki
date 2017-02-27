@@ -50,7 +50,7 @@ Signature | Example | Description | Express analogue
 Signature | Example | Description | Express analogue
 --- | --- | --- | ---
 `@Inject()` | `@Inject() myMethod(service1: Service1)` | Inject services in parameters for the class method.
-`@Deprecated(msg)` | `@deprecated("myOldMethod are deprecated") myOldMethod()` | Log a depreciation message in the console. 
+`@Deprecated(msg)` | `@Deprecated("myOldMethod are deprecated") myOldMethod()` | Log a depreciation message in the console. 
 
 ### Attributs/Methods Decorators
 
@@ -84,9 +84,6 @@ Signature | Example | Description | Express analogue
 `@Err()` | `useMethod(@Err() err: any) {}` | Inject the `Express.Err` service. (Decorator for middleware).| `function(err, request, response, next) {}`
 `@ResponseData()` | `useMethod(@ResponseData() data: any)` | Provide the data returned by the previous middlewares.
 `@EndpointInfo()` | `useMethod(@EndpointInfo() endpoint: Endpoint)` | Provide the endpoint settings.
-
-
-
 
 ## Services
 
