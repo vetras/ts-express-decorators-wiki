@@ -50,7 +50,7 @@ Signature | Example | Description | Express analogue
 Signature | Example | Description | Express analogue
 --- | --- | --- | ---
 `@Inject()` | `@Inject() myMethod(service1: Service1)` | Inject services in parameters for the class method.
-`@Deprecated(msg)` | `@deprecated() myOldMethod()` | Log a depreciation message in the console. 
+`@Deprecated(msg)` | `@deprecated("myOldMethod are deprecated") myOldMethod()` | Log a depreciation message in the console. 
 
 ### Attributs/Methods Decorators
 
@@ -75,6 +75,8 @@ Signature | Example | Description | Express analogue
 `@MultipartFile()` | `post(@MultipartFile() file: Multer.File) {}` | Provide the `Multer.File` object. | `request.file` 
 `@MultipartFile()` | `post(@MultipartFile() file: Multer.File[]) {}` | Provide a list of `Multer.File` object. | `request.files`
 
+> Note : `useClass` parameters is only required if you want to deserialize a collection type. (See [converters page](https://github.com/Romakita/ts-express-decorators/wiki/converters)).
+
 #### Only for middlewares
 
 Signature | Example | Description | Express analogue
@@ -84,7 +86,7 @@ Signature | Example | Description | Express analogue
 `@EndpointInfo()` | `useMethod(@EndpointInfo() endpoint: Endpoint)` | Provide the endpoint settings.
 
 
-> Note : `useClass` parameters is only required if you want to deserialize a collection type. (See [converters page](https://github.com/Romakita/ts-express-decorators/wiki/converters)).
+
 
 ## Services
 
