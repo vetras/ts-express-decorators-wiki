@@ -13,6 +13,7 @@ Signature | Example | Description
 
 ### Method decorators
 #### Routing
+
 Signature | Example | Description | Express analogue
 --- | --- | --- | ---
 `@All(route)` | `@All('/calendars') all()` | Intercept all request for a given route. | `router.all('/calendars', all)`
@@ -35,6 +36,7 @@ Signature | Example | Description | Express analogue
 `@Render(viewPath: string, options: any)` | `@Get('/calendars') @Render('calendars.html') myMethod()` | Render `viewPath` file using the method return data.
 
 #### Response
+
 Signature | Example | Description | Express analogue
 --- | --- | --- | ---
 `@ContentType()` | `@Get('/calendars') @ContentType('text/xml') myMethod()` | Sets the Content-Type HTTP header to the MIME type as determined by `mime.lookup()` for the specified type. If type contains the “/” character, then it sets the `Content-Type` to type. | `response.type('text/xml')`
@@ -42,23 +44,27 @@ Signature | Example | Description | Express analogue
 `@Location()` | `@Get('/calendars') @Location('/docs/page.html') myMethod()` | Sets the response Location HTTP header to the specified path parameter. | `response.location('/doc/page.html')` 
 `@Redirect()` | `@Get('/calendars') @Redirect('/docs/page.html') myMethod()` | Redirects to the URL derived from the specified path, with specified status, a positive integer that corresponds to an HTTP status code . If not specified, status defaults to “302 “Found”. | `response.redirect('/doc/page.html')` 
 `@Status()` | `@Get('/calendars') @Status(201) myMethod()` | Sets the HTTP status for the response. It is a chainable alias of Node’s `response.statusCode`. | `response.status(201)`
+
 #### Others
+
 Signature | Example | Description | Express analogue
 --- | --- | --- | ---
 `@Inject()` | `@Inject() myMethod(service1: Service1)` | Inject services in parameters for the class method.
+`@Deprecated(msg)` | `@deprecated() myOldMethod()` | Log a depreciation message in the console. 
 
 ### Attributs/Methods Decorators
+
 Signature | Example | Description | Express analogue
 --- | --- | --- | ---
 `@JsonProperty(obj: string | IJsonMetadata)` | `@JsonProperty() myAttributs: string;` | Flag an attribut that can be serialized or deserialized. (See [Converters page](https://github.com/Romakita/ts-express-decorators/wiki/converters))
 
 ### Parameter Decorators
+
 Signature | Example | Description | Express analogue
 --- | --- | --- | ---
 `@Request()` | `get(@Request() request: Request) {}` | Inject the `Express.Request` service. | `function(request, response) {}`
 `@Response()` | `get(@Response() response: Response) {}` | Inject the `Express.Response` service. | `function(request, response) {}`
 `@Next()` | `get(@Next() response: NextFunction) {}` | Inject the `Express.NextFunction` service. | `function(request, response, next) {}`
-`@Err()` | `myMiddlewareMethod(@Err() err: any) {}` | Inject the `Express.Err` service. (Decorator for middleware).| `function(err, request, response, next) {}`
 `@PathParams(expression?: string, useClass?: any)` | `get(@PathParam("id") id: string) {}` |  Get a parameters on `Express.request.params` attribut. | `request.params.id`
 `@BodyParams(expression?: string, useClass?: any)` | `get(@BodyParam() calendar: CalendarModel) {}` | Inject a parameters on `Express.request.body` attribut. | `request.body`
 `@CookiesParams(expression?: string, useClass?: any)` | `get(@CookiesParams("cook") cook: string) {}` | Get a parameters on `Express.request.cookies` attribut. | `request.cookies.cook`
@@ -66,7 +72,17 @@ Signature | Example | Description | Express analogue
 `@Session(expression?: string, useClass?: any)` | `get(@Session() context: Context) {}` | Get a parameters on `Express.request.session` attribut. | `request.session`
 `@HeaderParams(key: string)` | `get(@Header("x-token") token: string) {}` | Inject request header parameters. | `request.get('x-token')`
 `@Required()` | `get(@QueryParams("id") @Required() id: string) {}` | Set a required flag on a parameter. | 
+`@MultipartFile()` | `post(@MultipartFile() file: Multer.File) {}` | Provide the `Multer.File` object. | `request.file` 
+`@MultipartFile()` | `post(@MultipartFile() file: Multer.File[]) {}` | Provide a list of `Multer.File` object. | `request.files`
+
+#### Only for middlewares
+
+Signature | Example | Description | Express analogue
+--- | --- | --- | ---
+`@Err()` | `useMethod(@Err() err: any) {}` | Inject the `Express.Err` service. (Decorator for middleware).| `function(err, request, response, next) {}`
 `@ResponseData()` | `useMethod(@ResponseData() data: any)` | Provide the data returned by the previous middlewares.
+`@EndpointInfo()` | `useMethod(@EndpointInfo() endpoint: Endpoint)` | Provide the endpoint settings.
+
 
 > Note : `useClass` parameters is only required if you want to deserialize a collection type. (See [converters page](https://github.com/Romakita/ts-express-decorators/wiki/converters)).
 
