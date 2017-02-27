@@ -12,7 +12,7 @@ Signature | Example | Description
 [`@MiddlewareError()`](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares) | `@MiddlewareError() class MyMiddlewareError` | Declare a new MiddlewareError that can used with other method decorator or in the ServerLoader as global MiddlewareError. 
 
 ### Method decorators
-
+#### Routing
 Signature | Example | Description | Express analogue
 --- | --- | --- | ---
 `@All(route)` | `@All('/calendars') all()` | Intercept all request for a given route. | `router.all('/calendars', all)`
@@ -22,15 +22,30 @@ Signature | Example | Description | Express analogue
 `@Delete(route)` | `@Delete('/calendars') delete()` | Intercept request with DELETE Http verb for a given route. | `router.delete('/calendars', delete)`
 `@Head(route)` | `@Head('/calendars') head()` | Intercept request with HEAD Http verb for a given route. | `router.head('/calendars', head)`
 `@Patch(route)` | `@Patch('/calendars') patch()` | Intercept request with PATCH Http verb for a given route. | `router.patch('/calendars', patch)`
+
+#### Middlewares
+
+Signature | Example | Description | Express analogue
+--- | --- | --- | ---
+`@Authenticated(options?)` | `@Autenthicated() @Get('/calendars') get()` | Call the `Server.isAuthenticated` method to check if the user is authenticated. | `router.get('/calendars', authenticatedMiddleware, get)`
 `@Use(...middlewares: any[])` | `@Use(middleware) method()` |  Set a custom middleware or custom Http method. | `router.use(middleware, method)` 
 `@UseBefore(...middlewares: any[])` | `@UseBefore(middleware) method()` |  Set a middleware. This middleware are called before the class method. | `router.use(middleware, method)` 
 `@UseAfter(...middlewares: any[])` | `@UseAfter(middleware) method()` |  Set a middleware. This middleware are called after the class method. | `router.use(middleware, method)` 
-`@Authenticated(options?)` | `@Autenthicated() @Get('/calendars') get()` | Call the `Server.isAuthenticated` method to check if the user is authenticated. | `router.get('/calendars', authenticatedMiddleware, get)`
-`@ResponseView(viewPath: string, options: any)` | `@Get('/calendars') @ResponseView('calendars.html') patch()` | Render `viewPath` file using the method return data.
-`@Render(viewPath: string, options: any)` | `@Get('/calendars') @Render('calendars.html') patch()` | Render `viewPath` file using the method return data.
+`@ResponseView(viewPath: string, options: any)` | `@Get('/calendars') @ResponseView('calendars.html') myMethod()` | Render `viewPath` file using the method return data.
+`@Render(viewPath: string, options: any)` | `@Get('/calendars') @Render('calendars.html') myMethod()` | Render `viewPath` file using the method return data.
+
+#### Response
+Signature | Example | Description | Express analogue
+--- | --- | --- | ---
 `@ContentType()` | `@Get('/calendars') @ContentType('text/xml') myMethod()` | Sets the Content-Type HTTP header to the MIME type as determined by `mime.lookup()` for the specified type. If type contains the “/” character, then it sets the `Content-Type` to type. | `response.type('text/xml')`
+`@Header()` | `@Get('/calendars') @Header('Content-Type', 'plain/text') myMethod()` | Sets the response’s HTTP header field to value. To set multiple fields at once, pass an object as the parameter. | `response.set('Content-Type', 'text/xml')`
 `@Location()` | `@Get('/calendars') @Location('/docs/page.html') myMethod()` | Sets the response Location HTTP header to the specified path parameter. | `response.location('/doc/page.html')` 
 `@Redirect()` | `@Get('/calendars') @Redirect('/docs/page.html') myMethod()` | Redirects to the URL derived from the specified path, with specified status, a positive integer that corresponds to an HTTP status code . If not specified, status defaults to “302 “Found”. | `response.redirect('/doc/page.html')` 
+`@Status()` | `@Get('/calendars') @Status(201) myMethod()` | Sets the HTTP status for the response. It is a chainable alias of Node’s `response.statusCode`. | `response.status(201)`
+
+#### Others
+Signature | Example | Description | Express analogue
+--- | --- | --- | ---
 `@Inject()` | `@Inject() myMethod(service1: Service1)` | Inject services in parameters for the class method.
 
 ### Parameter Decorators
@@ -44,7 +59,7 @@ Signature | Example | Description | Express analogue
 `@CookiesParams(expression?: string, useClass?: any)` | `get(@CookiesParams("cook") cook: string) {}` | Get a parameters on `Express.request.cookies` attribut. | `request.cookies.cook`
 `@QueryParams(expression?: string, useClass?: any)` | `get(@QueryParams("id") id: string) {}` | Get a parameters on `Express.request.query` attribut. | `request.query.id`
 `@Session(expression?: string, useClass?: any)` | `get(@Session() context: Context) {}` | Get a parameters on `Express.request.session` attribut. | `request.session`
-`@Header(key: string)` | `get(@Header("x-token") token: string) {}` | Inject request header parameters. | `request.get('x-token')`
+`@HeaderParams(key: string)` | `get(@Header("x-token") token: string) {}` | Inject request header parameters. | `request.get('x-token')`
 `@Required()` | `get(@QueryParams("id") @Required() id: string) {}` | Set a required flag on a parameter. | 
 
 > Note : `useClass` parameters is only required if you want to deserialize a collection type. (See [converters page](https://github.com/Romakita/ts-express-decorators/wiki/converters)).
