@@ -74,15 +74,21 @@ class MyController {
     }
 }  
 ```
+
 ## Services available
 
 Some services are provided by `ts-express-decorators`. Theses services are follows:
 
 Service Name | Description
 --- | ---
+[ControllerService](https://github.com/Romakita/ts-express-decorators/wiki/Controllers) | This service contain all controllers defined with `@Controller`. 
 [ConverterService](https://github.com/Romakita/ts-express-decorators/wiki/Converters) | This service contain all default and custom converters defined with `@Converter()`.
-RequestService | Provide methods to get header, bodyParams, queryParams, pathParams or Session data from an expression.
+[ExpressApplication](https://github.com/Romakita/ts-express-decorators/wiki/ExpressApplication) | This service contain the instance of `Express.Application`.
+[InjectorService](https://github.com/Romakita/ts-express-decorators/wiki/InjectorService) | This service contain all services collected by `@Service` or services declared manually with `InjectorService.factory()` or `InjectorService.service()`.
+[MiddlewareService](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares) | This service contain all default and custom converters defined with `@Middleware()` or `@MiddlewareError()`.
 ParseService | Parse an expression and get a data from an Object.
-RouteService | Get all routes collected by `ts-express-decorators`.
+RequestService | Provide methods to get header, bodyParams, queryParams, pathParams or Session data from an expression.
+[RouterController](https://github.com/Romakita/ts-express-decorators/wiki/RouterController) | Provide the Express.Router instance of the class declared as `@Controller`.
+[ServerSettings](https://github.com/Romakita/ts-express-decorators/wiki/ServerSettings) | Provide the server configuration.
 
 
