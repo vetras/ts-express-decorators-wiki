@@ -67,7 +67,7 @@ export default class MyService {
 
 Finally, inject the service to another service:
 ```typescript
-import FooService from "./FooService";
+import MyService from "./MyService";
 
 @Service()
 export default class FooService {
@@ -112,7 +112,7 @@ InjectorService.factory(MyFooFactory, {
 
 ```typescript
 // otherservice.ts
-import {MyFooService} from "./FooFactory.ts";
+import {MyFooFactory} from "./FooFactory.ts";
 
 @Service()
 export default class OtherService {
