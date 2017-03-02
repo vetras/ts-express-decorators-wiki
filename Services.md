@@ -17,26 +17,32 @@ In first place, you must adding the `services` folder in your server settings li
 import * as Express from "express";
 import {ServerLoader, IServerLifecycle} from "ts-express-decorators";
 import Path = require("path");
+const rootDir = Path.resolve(__dirname);
 
+@ServerSettings({
+   rootDir,
+   mount: {
+      '/rest': `${rootDir}/controllers/**/**.js`
+   },
+   componentsScan: [
+       `${rootDir}/services/**/**.js`
+   ]
+})
 export class Server extends ServerLoader implements IServerLifecycle {
-    /**
-     * In your constructor set the global endpoint and configure the folder to scan the controllers.
-     * You can start the http and https server.
-     */
-    constructor() {
-        super();
-
-        const appPath: string = Path.resolve(__dirname);
-        
-        this.setEndpoint("/rest")                       // Declare your endpoint
-            .scan(appPath + "/controllers/**/**.js")    // Declare the directory that contains your controllers
-            .scan(appPath + "/services/**/**.js")    // Declare the directory that contains your services
-            .createHttpServer(8000)
-            .createHttpsServer({
-                port: 8080
-            });
-
-    }
+   
+   $onInit() { // Injector isn't initialized at this step.
+      MyService.configure(...);
+   }
+   
+   @Inject()
+   $onMountingMiddlewares(myService: MyService) {
+       this.use(myService.getMiddleware())
+   }
+   
+   @Inject()
+   $onReady(myService: MyService) {
+       
+   }
 }       
 ```
 In second place, create a new file in your services folder. Create a new Class definition and add the `@Service()` annotation on your class.
@@ -44,9 +50,17 @@ In second place, create a new file in your services folder. Create a new Class d
 Example :
 ```typescript
 @Service()
-export default class FooService {
+export default class MyService {
     constructor() {
     
+    }
+    
+    static configure(options: any) {
+       
+    }
+
+    public getMiddleware() {
+       return (request, response, next) => next();    
     }
 }
 ```
@@ -56,8 +70,8 @@ Finally, inject the service to another service:
 import FooService from "./FooService";
 
 @Service()
-export default class MyService {
-    constructor(private fooService: FooService) {
+export default class FooService {
+    constructor(private myService: myService) {
     
     }
 }
@@ -74,6 +88,40 @@ class MyController {
     }
 }  
 ```
+
+## Factory - Add a service already constructed 
+> This feature is available since v1.4.0
+
+This example show you how you can add a service already constructed like a npm module.
+
+```typescript
+// MyFooFactory.ts
+import {InjectorService} from "ts-express-decorators";
+
+export interface IMyFooFactory {
+   getFoo(): string;
+}
+
+export type MyFooFactory = IMyFooFactory;
+export const MyFooFactory = Symbol("MyFooFactory");
+
+InjectorService.factory(MyFooFactory, {
+     getFoo:  () => "test"
+});
+```
+
+```typescript
+// otherservice.ts
+import {MyFooService} from "./FooFactory.ts";
+
+@Service()
+export default class OtherService {
+     constructor(@Inject(MyFooFactory) myFooFactory: MyFooFactory){
+           console.log(myFooFactory.getFoo()); /// "test"
+     }
+}
+```
+> Note: TypeScript transform and store `MyFooFactory` as `Function` type in the metadata. So to inject a Factory, you must use the `@Inject(type)` decorator.
 
 ## Services available
 
