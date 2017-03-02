@@ -7,9 +7,9 @@
 The decorator `@Service()` declare a new service can be injected in other service or controller on there `constructor()`.
 All services annotated with `@Service()` are constructed one time.
 
-### Settings Server
+### Installation
 
-In first place, you must adding the `services` folder in your server settings like here :
+In first place, you must adding the `services` folder on `componentsScan` attribut in your server settings as follow :
  
 ```typescript
 import * as Express from "express";
