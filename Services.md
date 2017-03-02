@@ -15,7 +15,7 @@ In first place, you must adding the `services` folder in your server settings li
  
 ```typescript
 import * as Express from "express";
-import {ServerLoader, IServerLifecycle} from "ts-express-decorators";
+import {ServerLoader} from "ts-express-decorators";
 import Path = require("path");
 const rootDir = Path.resolve(__dirname);
 
@@ -28,7 +28,7 @@ const rootDir = Path.resolve(__dirname);
        `${rootDir}/services/**/**.js`
    ]
 })
-export class Server extends ServerLoader implements IServerLifecycle {
+export class Server extends ServerLoader {
    
    $onInit() { // Injector isn't initialized at this step.
       MyService.configure(...);
