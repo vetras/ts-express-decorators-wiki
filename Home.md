@@ -1,6 +1,6 @@
 Welcome to the TsExpressDecorators project wiki! 
 
-This wiki contains informations to developp your application with decorators, to create your own Controllers and Services.
+This wiki contains informations to developp your application with decorators, to create your own Controllers, Converters, Decorators, Middlewares and Services.
 * [Installation](https://github.com/Romakita/ts-express-decorators/wiki/Installation)
 * [Quick start](https://github.com/Romakita/ts-express-decorators/wiki/Quick-start)
 * [Examples](https://github.com/Romakita/ts-express-decorators/wiki/Examples)
