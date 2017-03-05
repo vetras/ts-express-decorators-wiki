@@ -16,7 +16,7 @@ All following decorators use `@JsonProperty` metadata to deserialize a Plain Obj
    * [Use your model on controller](https://github.com/Romakita/ts-express-decorators/wiki/Converters#use-your-model-on-controller)
  * [Create a custom converter](https://github.com/Romakita/ts-express-decorators/wiki/Converters#create-a-custom-converter)
    * [Simple type](https://github.com/Romakita/ts-express-decorators/wiki/Converters#simple-type)
-   * [Collections (Array, Map, Set)](https://github.com/Romakita/ts-express-decorators/wiki/Converters#collections-array-map-set)
+   * [Collections (Array, Map, Set)](https://github.com/Romakita/ts-express-decorators/wiki/Converters#collection-array-map-set)
  * [Implement serialization/deserialization methods](https://github.com/Romakita/ts-express-decorators/wiki/Converters#implement-serializationdeserialization-methods)
 
 ## Installation
