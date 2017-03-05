@@ -8,8 +8,46 @@ All following decorators use `@JsonProperty` metadata to deserialize a Plain Obj
 
 `@PathParams(expression?: string)`, `@BodyParams(expression?: string)`, `@CookiesParams(expression?: string)`, `@QueryParams(expression?: string)`, `@Session(expression?: string)`.
 
+## Sections
+
+ * [Installation](https://github.com/Romakita/ts-express-decorators/wiki/Converters#installation)
+ * [Example](https://github.com/Romakita/ts-express-decorators/wiki/Converters#example)
+   * [Define model](https://github.com/Romakita/ts-express-decorators/wiki/Converters#define-model)
+   * [Use your model on controller](https://github.com/Romakita/ts-express-decorators/wiki/Converters#use-your-model-on-controller)
+ * [Create a custom converter](https://github.com/Romakita/ts-express-decorators/wiki/Converters#create-a-custom-converter)
+   * [Simple type](https://github.com/Romakita/ts-express-decorators/wiki/Converters#simple-type)
+   * [Collections (Array, Map, Set)](https://github.com/Romakita/ts-express-decorators/wiki/Converters#collections-array-map-set)
+ * [Implement serialization/deserialization methods](https://github.com/Romakita/ts-express-decorators/wiki/Converters#implement-serializationdeserialization-methods)
+
+## Installation
+
+In first place, you must adding the `converters` folder on `componentsScan` attribute in your server settings as follow :
+ 
+```typescript
+import * as Express from "express";
+import {ServerLoader} from "ts-express-decorators";
+import Path = require("path");
+const rootDir = Path.resolve(__dirname);
+
+@ServerSettings({
+   rootDir,
+   mount: {
+      '/rest': `${rootDir}/controllers/**/**.js`
+   },
+   componentsScan: [
+       `${rootDir}/services/**/**.js`,
+       `${rootDir}/converters/**/**.js`
+   ]
+})
+export class Server extends ServerLoader {
+   
+}       
+```
+
+In second place, create a new file in your `converters` folder. Create a new Class definition and add the `@Converter()` annotation on your class.
+
 ## Example
-### Define a model:
+### Define a model
 
 `@JsonProperty()` let you decorate an attribut. By default, no parameters are required to use it. But in some cases, we need to configure explicitly the JSON attribut name mapped to the class attribut. Here an example of different use cases with `@JsonProperty()`:
 
@@ -40,7 +78,7 @@ class TaskModel {
 
 For the `Array`, you must  add the `{use: baseType}` option to the decorator. TypeClass will be used to deserialize each item in the collection stored on the attribut source.
 
-### Use your model on a Controller:
+### Use your model on a Controller
 
 ```typescript
 @Controller("/")
@@ -60,12 +98,12 @@ export class EventCtrl {
      }
 }
 ```
-## Customize serialization/deserialization
-### With @Converter
+
+## Create a custom converter
 
 `@Converter(...targetTypes)` let you to define some converters for a certain type/Class. It usefull for a generic conversion.
 
-#### Simple type
+### Simple type
 Here an example to create a custom converter for the Date type:
 
 ```typescript
@@ -86,14 +124,14 @@ export class DateConverter implements IConverter {
 }
 ```
 
-#### Collection (Array, Map, Set)
+### Collection (Array, Map, Set)
  
 For a collection, the converter is a little more complex because we need to know the base type to use when we deserialize an `Array`, `Map` or `Set` from Plain Object JavaScript. To do that, the deserialize method have two more parameters:
 
 * `target` parameter is equal to Array, the type given to the `@Converter(Array)`. `target` parameter isn't necessary if we have only one `targetType` for a class Converter (example: `@Converter(Array, Set, Map)`). 
 * `baseType` is the type given to `@JsonProperty({use: baseType})`. It's this type that will be used.
 
-##### Array converter
+#### `Array` converter
 
 ```typescript
 import {ConverterService, Converter, IConverter} from "ts-express-decorators";
@@ -104,9 +142,14 @@ export class ArrayConverter implements IConverter {
     constructor(private converterService: ConverterService) {}
 
     deserialize<T>(data: any[], target: any, baseType?: T): T[] {
-        return (data as Array<any>).map(item =>
-            this.converterService.deserialize(item, baseType)
-        );
+         
+        if (isArrayOrArrayClass(data)) {
+            return (data as Array<any>).map(item =>
+                this.converterService.deserialize(item, baseType)
+            );
+        }
+
+        return [data];
     }
 
     serialize(data: any[]) {
@@ -119,7 +162,7 @@ export class ArrayConverter implements IConverter {
 
 > In this example, we use the `ConverterService` to delegate the deserialization for each item. But you can implement your own deserialization/serialization strategy.
 
-##### Map converter
+#### `Map` converter
 ```typescript
 import {ConverterService, Converter, IConverter} from "ts-express-decorators";
 
@@ -154,7 +197,7 @@ export class MapConverter implements IConverter {
 
 > In this example, we use the `ConverterService` to delegate the deserialization for each item. But you can implement your own deserialization/serialization strategy.
 
-##### Set converter
+#### `Set` converter
 
 ```typescript
 import {ConverterService, Converter, IConverter} from "ts-express-decorators";
@@ -190,8 +233,9 @@ export class SetConverter implements IConverter {
 
 > In this example, we use the `ConverterService` to delegate the deserialization for each item. But you can implement your own deserialization/serialization strategy.
 
-### With methods
-You can implement the deserialize and serialize method on your class to customize conversion to Plain Object JavaScript or from a POJ.
+## Implement serialization/deserialization methods
+
+You can implement the `deserialize` and `serialize` method on your class to customize conversion to Plain Object JavaScript or from a POJ.
 
 Example:
 ```typescript
