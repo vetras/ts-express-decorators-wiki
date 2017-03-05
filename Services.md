@@ -9,7 +9,7 @@ All services annotated with `@Service()` are constructed one time.
 
 ### Installation
 
-In first place, you must adding the `services` folder on `componentsScan` attribut in your server settings as follow :
+In first place, you must adding the `services` folder on `componentsScan` attribute in your server settings as follow :
  
 ```typescript
 import * as Express from "express";
