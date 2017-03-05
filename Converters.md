@@ -13,7 +13,7 @@ All following decorators use `@JsonProperty` metadata to deserialize a Plain Obj
  * [Installation](https://github.com/Romakita/ts-express-decorators/wiki/Converters#installation)
  * [Example](https://github.com/Romakita/ts-express-decorators/wiki/Converters#example)
    * [Define model](https://github.com/Romakita/ts-express-decorators/wiki/Converters#define-model)
-   * [Use your model on controller](https://github.com/Romakita/ts-express-decorators/wiki/Converters#use-your-model-on-controller)
+   * [Use your model on controller](https://github.com/Romakita/ts-express-decorators/wiki/Converters#use-your-model-on-a-controller)
  * [Create a custom converter](https://github.com/Romakita/ts-express-decorators/wiki/Converters#create-a-custom-converter)
    * [Simple type](https://github.com/Romakita/ts-express-decorators/wiki/Converters#simple-type)
    * [Collections (Array, Map, Set)](https://github.com/Romakita/ts-express-decorators/wiki/Converters#collection-array-map-set)
