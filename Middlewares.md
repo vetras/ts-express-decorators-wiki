@@ -14,7 +14,6 @@ All middlewares decorated by `@Middleware` or `@MiddlewareError` have one method
   * [Simple use case](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#simple-use-case)
   * [Create your own decorator](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#create-your-own-decorator)
   * [How to format the Response with middleware](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#how-to-format-the-response-with-middleware)
-
 * [Declaring an error middleware for an endpoint](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#declaring-an-error-middleware-for-an-endpoint)
 
 ## Installation
