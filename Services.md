@@ -1,15 +1,21 @@
 [Home](https://github.com/Romakita/ts-express-decorators/wiki) > Services
 
-## IOC
-
 > Since v1.1.0, TsExpessDecorators support the service injection (IOC). 
 
 The decorator `@Service()` declare a new service can be injected in other service or controller on there `constructor()`.
 All services annotated with `@Service()` are constructed one time.
 
+## Sections
+
+* [Installation](https://github.com/Romakita/ts-express-decorators/wiki/Services#installation)
+* [Declaring a service](https://github.com/Romakita/ts-express-decorators/wiki/Services#declaring-a-service)
+* [Declaring a service already constructed (Factory)](https://github.com/Romakita/ts-express-decorators/wiki/Services#declaring-a-service-already-constructed-factory)
+* [Inject ExpressApplication](https://github.com/Romakita/ts-express-decorators/wiki/Services#inject-expressapplication)
+* [Services available](https://github.com/Romakita/ts-express-decorators/wiki/Services#services-available)
+
 ## Installation
 
-In first place, you must adding the `services` folder on `componentsScan` attribute in your server settings as follow :
+You must adding the `services` folder on `componentsScan` attribute in your server settings as follow :
  
 ```typescript
 import * as Express from "express";
@@ -43,9 +49,11 @@ export class Server extends ServerLoader {
    }
 }       
 ```
-In second place, create a new file in your services folder. Create a new Class definition and add the `@Service()` annotation on your class.
 
-Example :
+## Declaring a service
+
+Create a new file in your services folder. Create a new Class definition and add the `@Service()` annotation on your class.
+
 ```typescript
 @Service()
 export default class MyService {
@@ -87,7 +95,8 @@ class MyController {
 }  
 ```
 
-## Factory - Add a service already constructed 
+## Declaring a service already constructed (Factory)
+
 > This feature is available since v1.4.0
 
 This example show you how you can add a service already constructed like a npm module.
