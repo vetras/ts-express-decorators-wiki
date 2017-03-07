@@ -1,16 +1,21 @@
+[Home](https://github.com/Romakita/ts-express-decorators/wiki) > Middlewares
+
 > Since v1.4.x, TsExpessDecorators support Middlewares decorators
 
 `@Middleware()` is similar to the Express middleware with the difference that it is a class and you can use the IoC to inject other services on his constructor.
 
-All middlewares decorated by `@Middleware` or `@MiddlewareError` have one method named `use()`. This method can use all parameters decorators as you could see with the [Controllers](https://github.com/Romakita/ts-express-decorators/wiki/Controllers) and return promise. (See all [parameters decorators ](https://github.com/Romakita/ts-express-decorators/wiki/API-references#parameter-decorators)).In addition, you have this specifics parameters decorators for middlewares.
+All middlewares decorated by `@Middleware` or `@MiddlewareError` have one method named `use()`. This method can use all parameters decorators as you could see with the [Controllers](https://github.com/Romakita/ts-express-decorators/wiki/Controllers) and return promise. (See all [parameters decorators](https://github.com/Romakita/ts-express-decorators/wiki/API-references#parameter-decorators)).In addition, you have this specifics parameters decorators for middlewares.
 
-* [Installation]()
-* [Specifics parameters decorators]()
-* [Declare a middleware]()
-  * Global
-  * Global Error
-  * For an Endpoint
-  * Endpoint Error
+* [Installation](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#installation)
+* [Specifics parameters decorators](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#specifics-parameters-decorators)
+* [Declaring a global middleware](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#declaring-a-globale-middleware)
+* [Declaring a global error middleware](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#declaring-a-global-error-middleware)
+* [Declaring a middleware for an endpoint](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#declaring-a-middleware-for-an-endpoint)
+  * [Simple use case](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#simple-use-case)
+  * [Create your own decorator](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#create-your-own-decorator)
+  * [How to format the Response with middleware](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#how-to-format-the-response-with-middleware)
+
+* [Declaring an error middleware for an endpoint](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#declaring-an-error-middleware-for-an-endpoint)
 
 ## Installation
 
@@ -53,12 +58,9 @@ Signature | Example | Description | Express analogue
 `@ResponseData()` | `useMethod(@ResponseData() data: any)` | Provide the data returned by the previous middlewares.
 `@EndpointInfo()` | `useMethod(@EndpointInfo() endpoint: Endpoint)` | Provide the endpoint settings.
 
-## Declare a middleware
+## Declaring a global middleware 
 
 Global middlewares and Endpoint middlewares are almost similar but Global middleware cannot use the `@EndpointInfo` decorator.
-
-### Global
-
 Global middlewares let you to manage request and response on [`ServerLoader`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader).
 
 Create your middleware:
@@ -106,8 +108,7 @@ export class Server extends ServerLoader {
    }
 }       
 ```
-
-### Global Error
+## Declaring a global error middleware
 
 `@MiddlewareError()` let you to handle all error when you add your middleware in you [ServerLoader]().
 It's new way (and recommanded) to handle errors.
@@ -172,7 +173,9 @@ export class Server extends ServerLoader {
    }
 }       
 ```
-### For an endpoint
+
+## Declaring a middleware for an endpoint
+### Simple use case
 
 Middleware for an endpoint let you to manage request and response directly on a method controller. In most case you will create a middleware to do something on request or response like that:
 
@@ -214,7 +217,7 @@ class MyCtrl {
 }     
 ```
 
-#### Create your own decorator
+### Create your own decorator
 
 The previous example work fine in most case, but it doesn't allow us to configure specific parameters for an endpoint. To do that, we need to use the Endpoint API, `@EndpointInfo()` and create our custom decorator.
 
@@ -278,7 +281,7 @@ class MyCtrl {
 
 With this method you can create your own decorators. **You can propose your own decorators and middlewares via Pull Request or via an new issue.**
 
-### Response middleware
+### How to format the Response with middleware
 
 In next part, we see how we can create a decorator and middleware to check the mime of the request. In this part, we'll see how we can use a decorator and middleware to change the response format. To do that, we take as example the `ResponseViewMiddleware` implemented in TsExpressDecorators.
 
@@ -363,3 +366,4 @@ class MyCtrl {
    }
 }  
 ```
+## Declaring an error middleware for an endpoint
