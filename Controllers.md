@@ -2,6 +2,8 @@
 
 > Since v1.1.0 a controller are instanciated for each incoming request.
 
+## Sections
+
 * [Response and Request](#response-and-request)
 * [PathParams, BodyParams, QueryParams](#pathparams-bodyparams-queryparams)
 * [Header](#header)
