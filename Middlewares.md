@@ -70,19 +70,18 @@ import {NotAcceptable} from "ts-httpexceptions";
 @Middleware()
 export default class GlobalAcceptMimesMiddleware implements IMiddleware {
    
-   private mimes: string[];
-   
    constructor(private serverSettingsService: ServerSettingsService) {
-        this.mimes = this.serverSettingsService.get('acceptMimes') as string[] || [];
+
    }
 
    use(@Request() request) {
 
-        this.mimes.forEach((mime) => {
-            if (!request.accepts(mime)) {
-                throw new NotAcceptable(mime);
-            }
-        });
+        this.serverSettingsService.acceptMimes
+            .forEach((mime) => {
+                if (!request.accepts(mime)) {
+                    throw new NotAcceptable(mime);
+                }
+            });
    }
 }
 ```
@@ -185,19 +184,18 @@ import {NotAcceptable} from "ts-httpexceptions";
 @Middleware()
 export default class AcceptMimesMiddleware implements IMiddleware {
    
-   private mimes: string[];
-   
    constructor(private serverSettingsService: ServerSettingsService) {
-      this.mimes = this.serverSettings.get('acceptMimes');
+
    }
 
    use(@Request() request) {
 
-        this.mimes.forEach((mime) => {
-            if (!request.accepts(mime)) {
-                throw new NotAcceptable(mime);
-            }
-        });
+        this.serverSettingsService.acceptMimes
+            .forEach((mime) => {
+                if (!request.accepts(mime)) {
+                    throw new NotAcceptable(mime);
+                }
+            });
    }
 }
 ```
