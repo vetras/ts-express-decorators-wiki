@@ -1,12 +1,12 @@
 [Home](https://github.com/Romakita/ts-express-decorators/wiki) > Quick start
 
-#### Create your express server
+## Create your express server
 
 TsExpressDecorators provide a `ServerLoad` class to configure your 
 express quickly. Just create a `server.ts` in your root project, declare 
 a new `Server` class that extends [`ServerLoader`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader).
 
-##### Version 1.4.x (with decorator)
+### Version 1.4.x (with decorator)
 > Since v1.4.x you can use the decorator `@ServerSettings` to configure the server.
 
 ```typescript
@@ -61,7 +61,7 @@ new Server().start();
 
 To customize the server settings see [Configure server with decorator](https://github.com/Romakita/ts-express-decorators/wiki/configure-server-with-decorator).
 
-#### All versions (with methods)
+### All versions (with methods)
 
 These example is available for all version and use ServerLoader API to configure the server.
 
@@ -131,7 +131,7 @@ Server.Initialize();
 ```
 > Note: Since v1.4.0 implements `IServerLifeCycle` isn't necessary. `ServerLoader` implements already this interface.
 
-#### Create your first controller
+## Create your first controller
 
 Create a new `calendarCtrl.ts` in your controllers directory configured 
 previously with [`ServerLoader.scan()`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader----API#serverloaderscanglobpattern-serverloader) 
