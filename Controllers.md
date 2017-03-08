@@ -84,6 +84,8 @@ export class Server extends ServerLoader {
     
 }
 ```
+> Note: For the version 1.3.0 or under see [Versioning Rest API](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader-Versioning-Rest-API).
+
 ## Response and Request
 
 You can use decorator to inject `Express.RequestService`, `Express.Response` and 
