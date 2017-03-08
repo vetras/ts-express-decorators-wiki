@@ -18,10 +18,10 @@ const rootDir = Path.resolve(__dirname);
    }
 })
 export class Server extends ServerLoader {
-    static Initialize = (): Promise<any> => new Server().start();
+
 }
 
-Server.Initialize();
+new Server().start();
 ```
 
 ### With ServerLoader API
@@ -50,4 +50,6 @@ export class Server extends ServerLoader implements IServerLifecycle {
 
     }
 }
+
+new Server().start();
 ```
