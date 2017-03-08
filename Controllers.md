@@ -3,7 +3,7 @@
 > Since v1.1.0 a controller are instanciated for each incoming request.
 
 ## Sections
-
+* [Installation](#installation)
 * [Response and Request](#response-and-request)
 * [PathParams, BodyParams, QueryParams](#pathparams-bodyparams-queryparams)
 * [Header](#header)
@@ -11,7 +11,60 @@
 * [Custom middleware](#custom-middleware)
 * [Controller dependencies](#controller-dependencies)
 
-### Response and Request
+## Installation
+
+```
+import {ServerLoader, ServerSettings} from "ts-express-decorators";
+import Path = require("path");
+const rootDir = Path.resolve(__dirname);
+
+@ServerSettings({
+   rootDir,
+   mount: {
+      '/rest': `${rootDir}/controllers/*.js`
+   }
+})
+export class Server extends ServerLoader {
+
+    $onMountingMiddlewares(): void|Promise<any> {
+
+        const morgan = require('morgan'),
+            cookieParser = require('cookie-parser'),
+            bodyParser = require('body-parser'),
+            compress = require('compression'),
+            methodOverride = require('method-override');
+
+
+        this
+            .use(morgan('dev'))
+            .use(ServerLoader.AcceptMime("application/json"))
+
+            .use(cookieParser())
+            .use(compress({}))
+            .use(methodOverride())
+            .use(bodyParser.json())
+            .use(bodyParser.urlencoded({
+                extended: true
+            }));
+
+        return null;
+    }
+
+    public $onReady(){
+        console.log('Server started...');
+    }
+
+    public $onServerInitError(err){
+        console.error(err);
+    }
+
+    static Initialize = (): Promise<any> => new Server().start();
+}
+
+Server.Initialize();
+```
+
+## Response and Request
 
 You can use decorator to inject `Express.RequestService`, `Express.Response` and 
 `Express.NextFunction` services instead of the classic call provided by Express API.
@@ -45,7 +98,7 @@ export class CalendarCtrl {
 }
 ```
 
-### PathParams, BodyParams, QueryParams
+## PathParams, BodyParams, QueryParams
 
 `@PathParams` decorator provide you a quick access to an attribute `Express.request.params`.
 
@@ -76,7 +129,7 @@ Same decorator are available to get other params. Use `BodyParams`
 (with the right HTTP verb `@Post`, `@Put`, etc...), `QueryParams` or `CookiesParams` 
 to get parameters send by the client. 
 
-### Header
+## Header
 
 `@Header` decorator provide you a quick access to the `Express.request.get()`
 
@@ -99,7 +152,7 @@ export class CalendarCtrl {
 }
 ```
 
-### Use promise
+## Use promise
 
 TsExpressDecorators support Promise API to send a response. Just return a promise
 in your method and the controller will be waiting your promised response before 
@@ -138,7 +191,7 @@ export class CalendarCtrl {
 
 ```
 
-### Custom middleware
+## Custom middleware
 
 `@Use()` decoratore let you to add custom middleware on a method. 
 
