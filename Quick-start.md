@@ -10,11 +10,12 @@ a new `Server` class that extends [`ServerLoader`](https://github.com/Romakita/t
 > Since v1.4.x you can use the decorator `@ServerSettings` to configure the server.
 
 ```typescript
-import {ServerLoader, ServerSettings} from "ts-express-decorators";
+import {ServerLoader, ServerSettings, GlobalAcceptMimesMiddleware} from "ts-express-decorators";
 import Path = require("path");
 
 @ServerSettings({
-   rootDir: Path.resolve(__dirname)
+   rootDir: Path.resolve(__dirname),
+   acceptMimes: ['application/json'] // optional
 })
 export class Server extends ServerLoader {
     /**
@@ -32,8 +33,7 @@ export class Server extends ServerLoader {
 
         this
             .use(morgan('dev'))
-            .use(ServerLoader.AcceptMime("application/json"))
-
+            .use(GlobalAcceptMimesMiddleware) // optional
             .use(cookieParser())
             .use(compress({}))
             .use(methodOverride())
@@ -53,10 +53,9 @@ export class Server extends ServerLoader {
         console.error(err);
     }
 
-    static Initialize = (): Promise<any> => new Server().start();
 }
 
-Server.Initialize();
+new Server().start();
 ```
 > By default ServerLoader load controllers in `${rootDir}/controllers` and mount it to `/rest` endpoint.
 
@@ -67,7 +66,6 @@ To customize the server settings see [Configure server with decorator](https://g
 These example is available for all version and use ServerLoader API to configure the server.
 
 ```typescript
-import * as Express from "express";
 import {ServerLoader, IServerLifecycle} from "ts-express-decorators";
 import Path = require("path");
 
