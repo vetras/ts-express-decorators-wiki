@@ -21,7 +21,7 @@ During this phase you can initialize your database connection for example. This 
 
 Example with mongoose Api:
 ```typescript
-class Server extends ServerLoader implements IServerLifecycle {
+class Server extends ServerLoader {
 
     public $onInit(): Promise  {
         
@@ -48,7 +48,7 @@ At this step, [Services](https://github.com/Romakita/ts-express-decorators/wiki/
 
 Example of middlewares configuration:
 ```typescript
-class Server extends ServerLoader implements IServerLifecycle {
+class Server extends ServerLoader {
 
     public $onMountingMiddlewares(app: Express.Application): void | Promise  {
 
@@ -86,7 +86,7 @@ This hook is the right place to add middleware like [`serve-static`](https://git
 ##### With API
 
 ```typescript
-class Server extends ServerLoader implements IServerLifecycle {
+class Server extends ServerLoader {
 
     public $afterRoutesInit(){
         const serveStatic =   require('serve-static');
@@ -120,7 +120,7 @@ You can initialize other server here like a Socket server.
 
 Example:
 ```typescript
-class Server extends ServerLoader implements IServerLifecycle {
+class Server extends ServerLoader {
 
     public $onReady(): void {
         console.log('Server ready');
@@ -151,7 +151,7 @@ class MyCtrl {
 By default, the decorator respond true for each incoming request. To change this, you must implement your Authentification strategy by adding your method `$onAuth` on your Server:
 
 ```typescript
-class Server extends ServerLoader implements IServerLifecycle  {
+class Server extends ServerLoader {
     public $onAuth(request, response, next): void {
         next(request.isAuthenticated());
     }
@@ -160,7 +160,7 @@ class Server extends ServerLoader implements IServerLifecycle  {
 > Note: Since 1.2.5 $onAuth hooks accept a fourth parameter named `autorization`.
 
 ```typescript
-class Server extends ServerLoader implements IServerLifecycle  {
+class Server extends ServerLoader {
     public $onAuth(request, response, next, authorization?: any): void {
         next(request.isAuthenticated());
     }
@@ -197,7 +197,7 @@ You can change the default error management by adding your method on `$onError` 
 
 This example show you how the default Global Errors Handler work. Customize this hook to manage the errors: 
 ```typescript
-class Server extends ServerLoader implements IServerLifecycle  {
+class Server extends ServerLoader  {
 
     public $onError(error: any, request: Express.Request, response: Express.Response, next: Function): void {
 
