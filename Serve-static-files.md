@@ -26,4 +26,4 @@ export class Server extends ServerLoader {
 
 }
 ```
-Note: serveStatic attributes supports multiple directories
+> Note: serveStatic attributes supports multiple directories
