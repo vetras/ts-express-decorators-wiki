@@ -5,6 +5,7 @@ This wiki contains informations to developp your application with decorators, to
 * [Quick start](https://github.com/Romakita/ts-express-decorators/wiki/Quick-start)
 * [Examples](https://github.com/Romakita/ts-express-decorators/wiki/Examples)
 * [Controllers](https://github.com/Romakita/ts-express-decorators/wiki/Controllers)
+  * [Installation](https://github.com/Romakita/ts-express-decorators/wiki/Controllers#installation)
   * [Response and Request](https://github.com/Romakita/ts-express-decorators/wiki/Controllers#response-and-request)
   * [PathParams, BodyParams, QueryParams](https://github.com/Romakita/ts-express-decorators/wiki/Controllers#pathparams-bodyparams-queryparams)
   * [Header](https://github.com/Romakita/ts-express-decorators/wiki/Controllers#header)
