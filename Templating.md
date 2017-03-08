@@ -1,6 +1,6 @@
 [Home](https://github.com/Romakita/ts-express-decorators/wiki) > Templating
 
-> This documentation is available only for TsExpressDecorators v1.3.x on higher.
+> This feature is available only for TsExpressDecorators v1.3.x on higher.
 
 TsExpressDecorators v1.3.0 introduce a new decorator `@ResponseView` to separate rendering view from response data.
 
