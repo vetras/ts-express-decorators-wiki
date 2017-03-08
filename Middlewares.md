@@ -73,7 +73,7 @@ export default class GlobalAcceptMimesMiddleware implements IMiddleware {
    private mimes: string[];
    
    constructor(private serverSettingsService: ServerSettingsService) {
-      this.mimes = this.serverSettings.get('acceptMimes');
+      this.mimes = this.serverSettingsService.get('acceptMimes');
    }
 
    use(@Request() request) {
