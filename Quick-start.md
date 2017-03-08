@@ -12,9 +12,10 @@ a new `Server` class that extends [`ServerLoader`](https://github.com/Romakita/t
 ```typescript
 import {ServerLoader, ServerSettings, GlobalAcceptMimesMiddleware} from "ts-express-decorators";
 import Path = require("path");
+const rootDir = Path.resolve(__dirname);
 
 @ServerSettings({
-   rootDir: Path.resolve(__dirname),
+   rootDir,
    acceptMimes: ['application/json'] // optional
 })
 export class Server extends ServerLoader {
