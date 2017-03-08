@@ -3,7 +3,7 @@
 ## Create your express server
 
 TsExpressDecorators provide a `ServerLoad` class to configure your 
-express quickly. Just create a `server.ts` in your root project, declare 
+Express application quickly. Just create a `server.ts` in your root project, declare 
 a new `Server` class that extends [`ServerLoader`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader).
 
 ### Version 1.4.x (with decorator)
