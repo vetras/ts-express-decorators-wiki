@@ -189,6 +189,8 @@ See a complete integration example with [Passport.js](https://github.com/Romakit
 * **response**: `Express.Repsonse`
 * **NextFunction**: `Express.NextFunction`
 
+> This method is deprecated. Use [`@MiddlewareError()`](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares) instead of. 
+
 All errors are intercepted by the [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader). By default, all 
 HTTP Exceptions are automatically sent to the client, and technical error are
 sent as Internal Server Error. 
