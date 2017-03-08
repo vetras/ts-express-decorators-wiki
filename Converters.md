@@ -24,8 +24,7 @@ All following decorators use `@JsonProperty` metadata to deserialize a Plain Obj
 In first place, you must adding the `converters` folder on `componentsScan` attribute in your server settings as follow :
  
 ```typescript
-import * as Express from "express";
-import {ServerLoader} from "ts-express-decorators";
+import {ServerLoader, ServerSettings} from "ts-express-decorators";
 import Path = require("path");
 const rootDir = Path.resolve(__dirname);
 
