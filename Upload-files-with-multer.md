@@ -15,23 +15,22 @@ npm install @types/multer --save-dev
 By default the directory used is `${projetRoot}/uploads`. You can configure another directory on your `ServerLoader` settings.
 
 ```typescript
-const appPath = Path.resolve(__dirname);
+import {ServerLoader, ServerSettings} from "ts-express-decorators";
+import Path = require("path");
+const rootDir = Path.resolve(__dirname);
 
+@ServerSettings({
+   rootDir,
+   mount: {
+      '/rest': `${rootDir}/controllers/**/**.js`
+   },
+   uploadDir: `${rootDir}/custom-dir`,
+   componentsScan: [
+       `${rootDir}/services/**/**.js`
+   ]
+})
 export class Server extends ServerLoader implements IServerLifecycle {
 
-    constructor() {
-        super();
-
-        this.settings.uploadDir = `${appPath}/custom-dir`;
-
-        this
-            .mount('/rest', `${appPath}/controllers/**/**.js`)
-            .createHttpServer(8000)
-            .createHttpsServer({
-                port: 8080
-            });
-
-    }  
 }
 ```
 
