@@ -4,6 +4,7 @@
 
 ## Sections
 * [Installation](#installation)
+* [Versioning Rest API](#versioning-rest-api)
 * [Response and Request](#response-and-request)
 * [PathParams, BodyParams, QueryParams](#pathparams-bodyparams-queryparams)
 * [Header](#header)
@@ -12,7 +13,7 @@
 * [Controller dependencies](#controller-dependencies)
 
 ## Installation
-
+You can adding the `controllers` folder on `mount` attribute in your server settings as follow :
 ```
 import {ServerLoader, ServerSettings} from "ts-express-decorators";
 import Path = require("path");
@@ -64,6 +65,25 @@ export class Server extends ServerLoader {
 Server.Initialize();
 ```
 
+## Versioning Rest API
+As you in the previous example, the `mount` attribute is an object that let you to provide the global endpoint for your all controllers under the `controllers` folder.
+
+You can add more configuration to mount different endpoint associated to a folder. Here an other configuration example:
+```typescript
+import {ServerLoader, ServerSettings} from "ts-express-decorators";
+import Path = require("path");
+
+@ServerSettings({
+   rootDir: Path.resolve(__dirname),
+   mount: {
+     "/rest": "${rootDir}/controllers/current/**/*.js",
+     "/rest/v1": "${rootDir}/controllers/v1/**/*.js"
+   }
+})
+export class Server extends ServerLoader {
+    
+}
+```
 ## Response and Request
 
 You can use decorator to inject `Express.RequestService`, `Express.Response` and 
