@@ -10,7 +10,6 @@ a new `Server` class that extends [`ServerLoader`](https://github.com/Romakita/t
 > Since v1.4.x you can use the decorator `@ServerSettings` to configure the server.
 
 ```typescript
-import * as Express from "express";
 import {ServerLoader, ServerSettings} from "ts-express-decorators";
 import Path = require("path");
 
