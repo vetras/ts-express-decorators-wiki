@@ -4,12 +4,24 @@
 
 TsExpressDecorators v1.3.0 introduce a new decorator `@ResponseView` to separate rendering view from response data.
 
-### Configure ServerLoader
+## Installation
 
 ```typescript
-class Server extends ServerLoader implements IServerLifecycle {
+import Path = require("path");
+const rootDir = Path.resolve(__dirname);
 
-    public $onMountingMiddlewares(app: Express.Application): void | Promise  {
+@ServerSettings({
+   rootDir,
+   mount: {
+      '/rest': `${rootDir}/controllers/**/**.js`
+   },
+   componentsScan: [
+       `${rootDir}/services/**/**.js`
+   ]
+})
+class Server extends ServerLoader {
+
+    public $onMountingMiddlewares(): void | Promise  {
 
         const morgan = require('morgan'),
             cookieParser = require('cookie-parser'),
@@ -18,7 +30,7 @@ class Server extends ServerLoader implements IServerLifecycle {
             methodOverride = require('method-override'),
             session = require('express-session');
 
-        app.use(morgan('dev'))
+        this.use(morgan('dev'))
             .use(ServerLoader.AcceptMime("application/json"))
             .use(bodyParser.json())
             .use(bodyParser.urlencoded({
@@ -36,7 +48,7 @@ class Server extends ServerLoader implements IServerLifecycle {
 }
 ```
 
-### Use decorator @ResponseView
+## Use decorator @ResponseView or @Render
 
 ```typescript
 @Controller("/events")
