@@ -8,7 +8,7 @@ All middlewares decorated by `@Middleware` or `@MiddlewareError` have one method
 
 * [Installation](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#installation)
 * [Specifics parameters decorators](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#specifics-parameters-decorators)
-* [Declaring a global middleware](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#declaring-a-globale-middleware)
+* [Declaring a global middleware](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#declaring-a-global-middleware)
 * [Declaring a global error middleware](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#declaring-a-global-error-middleware)
 * [Declaring a middleware for an endpoint](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#declaring-a-middleware-for-an-endpoint)
   * [Simple use case](https://github.com/Romakita/ts-express-decorators/wiki/Middlewares#simple-use-case)
