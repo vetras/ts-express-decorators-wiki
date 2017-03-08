@@ -10,6 +10,7 @@
   * [Versioning Rest API](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader-Versioning-Rest-API)
   * [Lifecycle hooks](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader---Lifecycle-Hooks)
   * [Authentification](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader---Lifecycle-Hooks#serverloaderonauthrequest-response-next-void)
+  * [Global errors handlers](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader---Lifecycle-Hooks#serverloaderonerrorerror-request-response-next-void)
 * [Templating](https://github.com/Romakita/ts-express-decorators/wiki/Templating)
 * [Upload files with Multer](https://github.com/Romakita/ts-express-decorators/wiki/Upload-files-with-multer)
 * [Serve static files](https://github.com/Romakita/ts-express-decorators/wiki/Serve-static-files)
