@@ -243,3 +243,95 @@ import MyService from "./services";
 
 const exists = InjectorService.has(MyService); // true or false
 ```
+
+***
+
+#### `InjectorService.factory(target, instance): InjectorService`
+
+Add a new factory in `InjectorService` registry.
+
+**Parameters**
+
+Param | Type | Details
+---|---|---
+target | `symbol|Function` | The symbol or class associated to the instance.
+instance | `any` | The instance already constructed, associated to the target.
+
+**Example with symbol definition**
+
+```typescript
+import {InjectorService} from "ts-express-decorators";
+
+export interface IMyFooFactory {
+   getFoo(): string;
+}
+
+export type MyFooFactory = IMyFooFactory;
+export const MyFooFactory = Symbol("MyFooFactory");
+
+InjectorService.factory(MyFooFactory, {
+     getFoo:  () => "test"
+});
+
+@Service()
+export class OtherService {
+     constructor(@Inject(MyFooFactory) myFooFactory: MyFooFactory){
+           console.log(myFooFactory.getFoo()); /// "test"
+     }
+}
+```
+> Note: When you use the factory method with Symbol definition, you must use the `@Inject()` decorator to retrieve your factory in another Service. Advice: By convention all factory class name will be prefixed by `Factory`.
+
+**Example with class**
+```typescript
+import {InjectorService} from "ts-express-decorators";
+
+export default class MyFooService {
+    constructor(){}
+    getFoo() {
+        return "test";
+    }
+}
+
+InjectorService.factory(MyFooService, new MyFooService());
+
+@Service()
+export class OtherService {
+     constructor(myFooService: MyFooService){
+           console.log(myFooFactory.getFoo()); /// "test"
+     }
+}
+```
+
+***
+
+#### `InjectorService.service(target): InjectorService`
+
+Add a new service in the registry. This service will be constructed when `InjectorService` will loaded.
+
+**Parameters**
+
+Param | Type | Details
+---|---|---
+target | `symbol|Function` | The class to add in registry.
+
+**Example**
+
+```typescript
+import {InjectorService} from "ts-express-decorators";
+
+export default class MyFooService {
+    constructor(){}
+    getFoo() {
+        return "test";
+    }
+}
+
+InjectorService.service(MyFooService);
+
+InjectorService.load();
+
+const myFooService = InjectorService.get<MyFooService>(MyFooService);
+myFooService.getFoo(); // test
+```
+
