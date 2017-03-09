@@ -6,7 +6,7 @@ This service contain all services collected by `@Service` or services declared m
 
 ## Methods
 
-#### `InjectorService.invoke<T>(target, locals = new Map<Function, any>(), designParamTypes?: any[]): T`
+#### `InjectorService.invoke<T>(target [, locals [, designParamTypes]]): T`
 
 Invoke the class and inject all services that required by the class constructor.
 
@@ -16,7 +16,7 @@ Param | Type | Details
 ---|---|---
 target | `string|number` | The injectable class to invoke. Class parameters are injected according constructor signature.
 locals | `Map<Function, any>` | Optional object. If preset then any argument Class are read from this object first, before the `InjectorService` is consulted.
-designParamTypes | `any[]` | List of injectable types
+designParamTypes | `any[]` | Optional object. List of injectable types.
 
 **Return**
 The class constructed.
@@ -34,3 +34,42 @@ class OtherService {
 ```
 
 ***
+
+#### `InjectorService.invokeMethod(method, options): any`
+
+Invoke a class method and inject service.
+
+**Parameters**
+
+Param | Type | Details
+---|---|---
+method | `*` | The injectable method to invoke. Method parameters are injected according method signature.
+options | `IInjectableMethod | any[]` | Object to configure the invocation. 
+
+IInjectableMethod options:
+
+ * **target**: Optional. The class instance.
+ * **methodName**: `string` Optional. The method name.
+ * **designParamTypes**: `any[]` Optional. List of injectable types.
+ * **locals**: `Map<Function, any>` Optional. If preset then any argument Class are read from this object first, before the `InjectorService` is consulted. 
+
+**Return**
+The returned result by the method.
+
+**Example**
+```typescript
+import {InjectorService} from "ts-express-decorators";
+
+class MyService {
+   constructor(injectorService: InjectorService) {
+
+      injectorService.invokeMethod(this.method, {
+          this,
+          methodName: 'method'
+      });
+   } 
+   
+   method(otherService: OtherService) {}
+}
+```
+
