@@ -18,7 +18,7 @@ target | `string|number` | The injectable class to invoke. Class parameters are 
 locals | `Map<Function, any>` | Optional object. If preset then any argument Class are read from this object first, before the `InjectorService` is consulted.
 designParamTypes | `any[]` | List of injectable types
 
-** Return**
+**Return**
 The class constructed.
 
 **Example**
