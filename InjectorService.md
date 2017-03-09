@@ -19,6 +19,7 @@ locals | `Map<Function, any>` | Optional object. If preset then any argument Cl
 designParamTypes | `any[]` | Optional object. List of injectable types.
 
 **Return**
+
 The class constructed.
 
 **Example**
@@ -54,6 +55,7 @@ IInjectableMethod options:
  * **locals**: `Map<Function, any>` Optional. If preset then any argument Class are read from this object first, before the `InjectorService` is consulted. 
 
 **Return**
+
 The returned result by the method.
 
 **Example**
@@ -72,4 +74,58 @@ class MyService {
    method(otherService: OtherService) {}
 }
 ```
+***
 
+#### `InjectorService.get<T>(target): T`
+
+Get a service already constructed.
+
+**Parameters**
+
+Param | Type | Details
+---|---|---
+target | `*` | The service class.
+
+**Return**
+
+The class already constructed
+
+**Example**
+```typescript
+import {InjectorService} from "ts-express-decorators";
+import MyService from "./services";
+
+class OtherService {
+   constructor(injectorService: InjectorService) {
+
+      const myService = injectorService.get<MyService>(MyService);
+
+   }
+}
+```
+
+***
+
+#### `InjectorService.has(target): boolean`
+
+Check if the service exists in `InjectorService`.
+
+**Parameters**
+
+Param | Type | Details
+---|---|---
+target | `*` | The service class.
+
+**Example**
+```typescript
+import {InjectorService} from "ts-express-decorators";
+import MyService from "./services";
+
+class OtherService {
+   constructor(injectorService: InjectorService) {
+
+      const exists = injectorService.has(MyService); // true or false
+
+   }
+}
+```
