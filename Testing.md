@@ -169,6 +169,34 @@ describe("ArrayConverter :", () => {
 });
 ```
 
+### Testing middlewares
+
+`@Middleware()` is similar to the Express middleware with the difference that it is a class and you can use the IoC to inject other services on his constructor.
+
+```typescript
+import {expect} from "chai";
+import {inject} from 'ts-express-decorators/testing';
+import {AcceptMimeMiddleware} from "ts-express-decorators";
+
+describe('AcceptMimesMiddleware :', () => {
+
+    it('should accept mime', inject([MiddlewareService], (middlewareService: MiddlewareService) => {
+
+        const middleware = middlewareService.invoke<AcceptMimeMiddleware>(AcceptMimeMiddleware);
+        const request = new FakeRequest();
+
+        request.mime = "application/json";
+
+        middleware.use({
+            getMetadata: () => {
+                return ['application/json']
+            }
+        } as any, request as any);
+
+    }));
+});
+```
+
 ## Test your Rest API
 ### Installation
 
