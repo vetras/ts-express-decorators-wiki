@@ -11,7 +11,7 @@ This section help you to test your service. It's highly recommended to test your
   * [Testing controllers]()
   * [Testing converters]()
   * [Testing middlewares]()
-* Test your Rest API
+* Test your REST API
 
 ## Unit testing
 ### Testing services
