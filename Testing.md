@@ -66,6 +66,40 @@ describe('DbService :', () => {
 
 ## Testing converters
 
+Converters let you to customize how ConverterService will deserialize a data for one or more types. This example show you the unit testing for the Array type. 
+
+The converter implementation in:
+```typescript
+import ConverterService from "../services/converter";
+import {Converter} from "../decorators/converter";
+import {IConverter} from "../interfaces/Converter";
+import {isArrayOrArrayClass} from "../utils/utils";
+
+@Converter(Array)
+export class ArrayConverter implements IConverter {
+
+    constructor(private converterService: ConverterService) {}
+
+    deserialize<T>(data: any, target: any, baseType?: T): T[] {
+
+        if (isArrayOrArrayClass(data)) {
+            return (data as Array<any>).map(item =>
+                this.converterService.deserialize(item, baseType)
+            );
+        }
+
+        return [data];
+    }
+
+    serialize(data: any[]) {
+        return (data as Array<any>).map(item =>
+            this.converterService.serialize(item)
+        );
+    }
+}
+
+```
+And the unit testing:
 ```typescript
 import {expect} from "chai";
 import {inject} from 'ts-express-decorators/testing';
