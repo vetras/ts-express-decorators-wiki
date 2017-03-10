@@ -1,10 +1,9 @@
 [Home](https://github.com/Romakita/ts-express-decorators/wiki) > Testing
 
-This section help you to test your service. It's highly recommended to test your application with Mocha + Chai, but you can use Jasmine or other unit test framework.
-
 ## Sections
 
 * Unit testing
+  * [Installation]()
   * [Testing services]()
   * [Testing controllers]()
   * [Testing converters]()
@@ -12,6 +11,52 @@ This section help you to test your service. It's highly recommended to test your
 * Test your REST API
 
 ## Unit testing
+### Installation
+
+All following examples are based on `mocha + chai` testing framework. Obviously, you can use another framework like Jasmine !
+To install mocha and chai just run these commands:
+```
+npm install --save-dev mocha chai
+```
+
+You can use `mocha` and `chai` with TypeScript.
+
+```typescript
+npm install --save-dev @types/mocha @types/chai
+```
+
+And add `mocha` and `chai` types in your `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "commonjs",
+    "target": "es5",
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "declaration":false,
+    "experimentalDecorators":true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "isolatedModules": false,
+    "suppressImplicitAnyIndexErrors": false,
+    "lib": ["es6", "dom"],
+    "types":[
+      "node",
+      "chai",
+      "mocha",
+      "express",
+      "reflect-metadata"
+    ]
+  },
+
+  "exclude": [
+    "node_modules"
+  ]
+}
+```
+
 ### Testing services
 
 TsExpressDecorators are bundled with a testing module `ts-express-decorators/testing`. This module provide a function `inject()` to inject your services collected via annotation `@Service()`.
@@ -123,4 +168,51 @@ describe("ArrayConverter :", () => {
 ```
 
 ## Test your Rest API
+### Installation
+
+To test your API, I recommend you to use the [`supertest`](https://github.com/visionmedia/supertest) module.
+
+To install supertest just run these commands:
+```
+npm install --save-dev supertest
+```
+
+You can use `supertest` with TypeScript.
+
+```typescript
+npm install --save-dev @types/supertest
+```
+
+And add `mocha` and `chai` types in your `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "commonjs",
+    "target": "es5",
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "declaration":false,
+    "experimentalDecorators":true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "isolatedModules": false,
+    "suppressImplicitAnyIndexErrors": false,
+    "lib": ["es6", "dom"],
+    "types":[
+      "node",
+      "chai",
+      "mocha",
+      "express",
+      "reflect-metadata",
+      "supertest"
+    ]
+  },
+
+  "exclude": [
+    "node_modules"
+  ]
+}
+```
 
