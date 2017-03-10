@@ -2,8 +2,7 @@
 
 ### new ServerLoader()
 
-Create new instance of [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader). [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader) patch the [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage) to add the method `$tryAuth`.
-> For this reason, online one instance of [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader) can be constructed.
+Create a new instance of [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader). 
 
 Since v1.4.0 you can use the [@ServerSettings()](https://github.com/Romakita/ts-express-decorators/wiki/Configure-server-with-decorator) decorator to configure your server. Here the configuration with the decorator:
 
@@ -74,6 +73,8 @@ export class Server extends ServerLoader implements IServerLifecycle {
 }
 ```
 > `IServerLifecycle` provide interface to implement quickly the right methods to hook [lifecycle's phase](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader---Lifecycle-Hooks). 
+
+In v1.3.0 or under, [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader) patch the [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage) to add the method `$tryAuth`. For this reason, online one instance of [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader) can be constructed.
 
 ***
 
