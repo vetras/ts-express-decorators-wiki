@@ -5,7 +5,7 @@
 Create new instance of [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader). [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader) patch the [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage) to add the method `$tryAuth`.
 > For this reason, online one instance of [ServerLoader](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader) can be constructed.
 
-Since v1.4.0 you can use the [@ServerSettings()](https://github.com/Romakita/ts-express-decorators/wiki/Configure-server-with-decorator) decorator to configure your server. Here the same configuration with the decorator:
+Since v1.4.0 you can use the [@ServerSettings()](https://github.com/Romakita/ts-express-decorators/wiki/Configure-server-with-decorator) decorator to configure your server. Here the configuration with the decorator:
 
 ```typescript
 import * as Express from "express";
