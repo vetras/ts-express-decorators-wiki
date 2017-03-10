@@ -4,6 +4,23 @@
 
 This service contain all services collected by `@Service` or services declared manually with `InjectorService.factory()` or `InjectorService.service()`.
 
+Example:
+```typescript
+import {InjectorService} from "ts-express-decorators";
+
+// Import the services (all services are decorated with @Service()";
+import MyService1 from "./services/service1";
+import MyService2 from "./services/service2";
+import MyService3 from "./services/service3";
+
+// When all services is imported you can load InjectorService.
+InjectorService.load();
+
+const myService1 = InjectorService.get<MyService1>(MyServcice1);
+
+```
+> Note: `ServerLoader` make this automatically when you use `ServerLoader.mount()` method (or settings attributes) and load services and controllers during the starting server.
+
 ## Methods
 
 #### `InjectorService.invoke<T>(target [, locals [, designParamTypes]]): T`
