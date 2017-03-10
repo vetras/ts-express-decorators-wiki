@@ -227,6 +227,7 @@ import {expect} from "chai";
 import * as SuperTest from "supertest";
 
 describe("Rest", () => {
+    // bootstrap your Server to load all endpoints before run your test
     beforeEach(bootstrap(Server));
 
     describe("GET /rest/calendars", () => {
