@@ -65,17 +65,27 @@ Server.Initialize();
 
 ***
 
-#### ServerLoader.createHttpServer(port): ServerLoader
-**port**: `string|number`
+#### `ServerLoader.createHttpServer(port): ServerLoader`
 
 Create a new HTTP server with the provided `port`.
 
+**Parameters**
+
+Param | Type | Details
+---|---|---
+port | `string|number` | The HTTP port server.
+
 ***
 
-#### ServerLoader.createHttpsServer(httpsOptions): ServerLoader
-**httpsOptions**: `IHTTPSServerOptions`
+#### `ServerLoader.createHttpsServer(httpsOptions): ServerLoader`
 
 Create a new HTTPs server.
+
+**Parameters**
+
+Param | Type | Details
+---|---|---
+httpsOptions | `IHTTPSServerOptions` | Options to create new HTTPS server.
 
 `httpsOptions` <IHTTPSServerOptions>:
 
@@ -89,44 +99,60 @@ See more info on [httpsOptions](https://nodejs.org/api/tls.html#tls_tls_createse
 
 ***
 
-#### get ServerLoader.expressApp: [Express.Application](http://expressjs.com/fr/4x/api.html#app)
+#### `get ServerLoader.expressApp: Express.Application`
 
 Return the current instance of [Express.Application](http://expressjs.com/fr/4x/api.html#app).
 
 ***
 
-#### get ServerLoader.httpServer: [Http.Server](https://nodejs.org/api/http.html#http_class_http_server)
+#### `get ServerLoader.httpServer: Http.Server`
 
 Return the current instance of [Http.Server](https://nodejs.org/api/http.html#http_class_http_server).
 
 ***
 
-#### get ServerLoader.httpsServer: [Https.Server](https://nodejs.org/api/https.html#https_class_https_server)
+#### `get ServerLoader.httpsServer: Https.Server`
 
 Return the current instance of [Https.Server](https://nodejs.org/api/https.html#https_class_https_server).
 
 ***
-#### ServerLoader.mount(endpoint, globPattern): ServerLoader
-**endpoint**: `string`
-**globPattern**: `string`
+#### `ServerLoader.mount(endpoint, globPattern): ServerLoader`
 
 Mount all controllers files that match with `globPattern` ([Glob Pattern](https://www.npmjs.com/package/glob)) under the `endpoint`. See  [Versioning Rest API](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader-Versioning-Rest-API) for more informations.
 
+**Parameters**
+
+Param | Type | Details
+---|---|---
+endpoint | `string` | endpoint url.
+globPattern | `string` | Glob pattern to list the controllers.
+
 ***
 
-#### ServerLoader.setEndpoint(endpoint): ServerLoader
+#### `ServerLoader.setEndpoint(endpoint): ServerLoader`
 **endpoint**: `string`
 
-Configure the global endpoint path for all collected controller.
+Configure the default endpoint path for all collected controllers.
+
+**Parameters**
+
+Param | Type | Details
+---|---|---
+endpoint | `string` | endpoint url.
 
 ***
 
-#### ServerLoader.scan(globPattern): ServerLoader
-**globPattern**: `string`
+#### `ServerLoader.scan(globPattern): ServerLoader`
 
 Scan and imports all files matching the pattern. See the document on the [Glob pattern](https://www.npmjs.com/package/glob) for more information.
 
-Example:
+**Parameters**
+
+Param | Type | Details
+---|---|---
+globPattern | `string` | Glob pattern to list the components (services, controllers, converters or middlewares).
+
+**Example**
 ```typescript
 import {ServerLoader} from "ts-express-decorators";
 import Path = require("path");
@@ -148,5 +174,6 @@ Theses pattern scan all files in the directories `controllers`, `services` recur
 
 ***
 
-#### ServerLoader.start(): Promise
+#### `ServerLoader.start(): Promise`
+
 Start the express server.
