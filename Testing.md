@@ -6,12 +6,15 @@ This section help you to test your service. It's highly recommended to test your
 
 ## Sections
 
-* [Testing services]()
-* [Testing controllers]()
-* [Testing converters]()
-* [Testing middlewares]()
+* Unit testing
+  * [Testing services]()
+  * [Testing controllers]()
+  * [Testing converters]()
+  * [Testing middlewares]()
+* Test your Rest API
 
-## Testing services
+## Unit testing
+### Testing services
 
 TsExpressDecorators are bundled with a testing module `ts-express-decorators/testing`. This module provide a function `inject()` to inject your services collected via annotation `@Service()`.
 
@@ -64,7 +67,7 @@ describe('DbService :', () => {
 });
 ```
 
-## Testing converters
+### Testing converters
 
 `Converters` let you to customize how [ConverterService](https://github.com/Romakita/ts-express-decorators/wiki/Converters) will deserialize a data for one or more types. This example show you the unit testing for the Array type. 
 
@@ -120,4 +123,6 @@ describe("ArrayConverter :", () => {
 
 });
 ```
+
+## Test your Rest API
 
