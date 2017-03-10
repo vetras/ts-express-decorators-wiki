@@ -64,3 +64,26 @@ describe('DbService :', () => {
 });
 ```
 
+## Testing converters
+
+```typescript
+import {expect} from "chai";
+import {inject} from 'ts-express-decorators/testing';
+import {ConverterService} from "ts-express-decorators/src";
+
+describe("ArrayConverter :", () => {
+
+    it('should convert data', inject([ConverterService], (converterService: ConverterService) => {
+
+        const arrayConverter = converterService.getConverter(Array);
+
+        expect(!!arrayConverter).to.be.true;
+
+        expect(arrayConverter.deserialize(1)).to.be.an('array');
+        expect(arrayConverter.deserialize([1])).to.be.an('array');
+
+    }));
+
+});
+```
+
