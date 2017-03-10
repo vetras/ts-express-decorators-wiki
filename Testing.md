@@ -216,3 +216,39 @@ And add `mocha` and `chai` types in your `tsconfig.json`:
 }
 ```
 
+### Example
+
+```typescript
+
+import {Server} from "../Server";
+import {ExpressApplication} from "ts-express-decorators";
+import {Done, bootstrap} from "ts-express-decorators/testing";
+import {expect} from "chai";
+import * as SuperTest from "supertest";
+
+describe("Rest", () => {
+    beforeEach(bootstrap(Server));
+
+    describe("GET /rest/calendars", () => {
+       
+        it("should do something", inject([ExpressApplication, Done], (expressApplication: ExpressApplication, done: Done) => {
+
+            SuperTest(expressApplication)
+                .get("/rest/calendars")
+                .expect(200)
+                .end((err, response: any) => {
+                    if (err) {
+                        throw (err);
+                    }
+
+                    const obj = JSON.parse(response.text);
+
+                    expect(obj).to.be.an('array');
+
+                    done();
+                });
+ 
+        });
+    });
+});
+```
