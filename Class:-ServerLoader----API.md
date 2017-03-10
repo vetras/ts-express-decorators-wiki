@@ -8,6 +8,7 @@ Create new instance of [ServerLoader](https://github.com/Romakita/ts-express-dec
 Since v1.4.0 you can use the [@ServerSettings()](https://github.com/Romakita/ts-express-decorators/wiki/Configure-server-with-decorator) decorator to configure your server. Here the configuration with the decorator:
 
 ```typescript
+// In server.ts
 import * as Express from "express";
 import {ServerLoader, ServerSettings} from "ts-express-decorators";
 import Path = require("path");
@@ -21,10 +22,22 @@ import Path = require("path");
    }
 })
 export class Server extends ServerLoader {
-    static Initialize = (): Promise<any> => new Server().start();
+    
+    $onReady(){
+        console.log('Server started...');
+    }
+    
+    $onServerInitError(err){
+        console.error(err);
+    }
 }
 
-Server.Initialize();
+// In app.ts
+import Server from "./server";
+new Server()
+   .start()
+   .then(() => console.log('started'))
+   .catch(er => console.error(er));
 ```
 
 For other version under v1.4.0, you must configure configure all folders that you want import in your `Server` with [`ServerLoader.scan()`](#serverloaderscanglobpattern-serverloader) method.
