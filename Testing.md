@@ -4,38 +4,13 @@
 
 This section help you to test your service. It's highly recommended to test your application with Mocha + Chai, but you can use Jasmine or other unit test framework.
 
-## Installation
+## Sections
 
-Install the latest version of Mocha and Chai:
+* [Testing services]()
+* [Testing controllers]()
+* [Testing converters]()
+* [Testing middlewares]()
 
-```typescript
-npm install --save-dev mocha chai @types/mocha @types/chai
-```
-Then to use the tools to test your service/controller you need to add these lines in your `tsconfig.json`:
-```json
-{
-  "compilerOptions":{
-    "baseUrl":".",
-    "types": [
-      "reflect-metadata",
-      "mocha",
-      "chai"
-    ],
-    "paths":{
-      "ts-express-decorators/testing": [
-        "node_modules/ts-express-decorators/dts/testing",
-        "node_modules/ts-express-decorators/lib/testing"
-      ]
-    }
-  }
-}
-```
-> Since 1.4.0-7 isn't necessary.
-
-With this configuration, you will be able to use the import of the test module:
-```typescript
-import {inject} from "ts-express-decorators/testing";
-```
 ## Testing services
 
 TsExpressDecorators are bundled with a testing module `ts-express-decorators/testing`. This module provide a function `inject()` to inject your services collected via annotation `@Service()`.
@@ -67,7 +42,7 @@ describe('ParseService :', () => {
 });
 ```
 
-Testing asynchrone method is also possible with `Done` function:
+Testing asynchronous method is also possible with `Done` function:
 
 ```typescript
 import {expect} from "chai";
@@ -76,7 +51,7 @@ import DbService from '../src/services/db';
 
 describe('DbService :', () => {
 
-    it('should data from db', inject([DbService, Done], (dbService: dbService, done) => {
+    it('should data from db', inject([DbService, Done], (dbService: dbService, done: Done) => {
         
         dbService
            .getData()
