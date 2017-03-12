@@ -43,7 +43,8 @@ export default class SocketService {
           
       }
       /**
-       * Store all callbacks that will be adding to socket.io instance.
+       * Store all callbacks that will be adding to socket.io instance when
+       *  it'll be created. See SocketService.createServer().
        */
       public onConnection(callback: Function): SocketService {
           this.stacks.push(callback);
