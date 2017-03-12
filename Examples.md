@@ -2,11 +2,12 @@
 
 Some examples are available along these links :
 
-**v1.3.0 and under**
+**Projects examples for v1.3.0 and under**
+
 * [Basics usages](https://github.com/Romakita/example-ts-express-decorator/tree/master/basic)
 * [Service declaration](https://github.com/Romakita/example-ts-express-decorator/tree/master/example-services)
 * [Authentification with Passport.js](https://github.com/Romakita/example-ts-express-decorator/tree/master/example-passport)
 
-Other examples:
+**Other examples**
 
-* [How to integrate Socket.io](https://github.com/Romakita/ts-express-decorators/wiki/how-to-integrate-socket-io)
+* [How to integrate Socket.io](https://github.com/Romakita/ts-express-decorators/wiki/How-to-integrate-Socket.io)
