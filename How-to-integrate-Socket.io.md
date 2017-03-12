@@ -1,5 +1,7 @@
 [Home](https://github.com/Romakita/ts-express-decorators/wiki) > [Examples](https://github.com/Romakita/ts-express-decorators/wiki/Examples) > Socket.io
 
+>  Socket.IO enables real-time bidirectional event-based communication. It works on every platform, browser or device, focusing equally on reliability and speed. 
+
 ## Installation
 Run this command:
 ```typescript
