@@ -1,4 +1,4 @@
-[Home](https://github.com/Romakita/ts-express-decorators/wiki) > Example
+[Home](https://github.com/Romakita/ts-express-decorators/wiki) > Examples
 
 Some examples are available along these links :
 
