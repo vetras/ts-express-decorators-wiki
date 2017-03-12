@@ -27,7 +27,7 @@ class Server extends ServerLoader {
     }
 }
 ```
-Wrap socket.io into the a Service:
+Wrap socket.io into a service:
 ```typescript
 import * as Http from "http";
 import {Service} from "ts-express-decorators";
