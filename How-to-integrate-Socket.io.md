@@ -14,7 +14,7 @@ npm install --save-dev @types/socket.io
 
 Use the `$onReady` hook to create your Socket server:
 ```typescript
-import {ServerLoader, ServerSettings, Inject} 
+import {ServerLoader, ServerSettings, Inject} from "ts-express-decorators";
 import SocketService from "./services/SocketService";
 
 class Server extends ServerLoader {
@@ -30,20 +30,50 @@ class Server extends ServerLoader {
 Wrap socket.io into the a Service:
 ```typescript
 import * as Http from "http";
+import {Service} from "ts-express-decorators";
 
 @Service()
 export default class SocketService {
       private io: SocketIO.Server;
+      private stacks = [];
 
       constructor() {
           
       }
-
-      public emit(...args) => SocketService.io.emit(...args);
-
-      static createServer(httpServer: Http.Server)  {
-           SocketService.io = SocketIO(httpServer);
-           // Then create your socket app...
+      /**
+       * Store all callbacks that will be adding to socket.io instance.
+       */
+      public onConnection(callback: Function): SocketService {
+          this.stacks.push(callback);
+          return this;
       }
+
+      public emit(...args) => this.io.emit(...args);
+
+      createServer(httpServer: Http.Server)  {
+           this.io = SocketIO(httpServer);
+
+           // Map all callbacks to this connection events.
+           this.stacks.forEach(cb => this.io.on('connection', cb));
+      }
+}
+```
+
+Finally inject your service to another service or controller : 
+
+```typescript
+import {Controller} from "ts-express-decorators";
+import SocketService from "../services/SocketService";
+
+@Controller('/')
+export class MySocketCtrl {
+    
+   constructor(private socketService: SocketService) {
+       socketService.onConnection(this.onConnection);
+   }
+   
+   private onConnection = (socket) => {
+      // write your code :)
+   }
 }
 ```
