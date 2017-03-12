@@ -62,7 +62,7 @@ export default class SocketService {
 }
 ```
 
-Finally inject your service to another service or controller : 
+Finally, inject your service to another service or controller : 
 
 ```typescript
 import {Controller} from "ts-express-decorators";
