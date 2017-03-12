@@ -2,7 +2,7 @@
 
 Some examples are available along these links :
 
-** Projects examples for v1.4.0 and more**
+**Projects examples for v1.4.0 and more**
 
 * [Basics usages](https://github.com/Romakita/example-ts-express-decorator/tree/1.4.0/basic)
 * [Service declaration](https://github.com/Romakita/example-ts-express-decorator/tree/1.4.0/example-services)
