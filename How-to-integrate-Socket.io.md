@@ -18,7 +18,11 @@ Use the `$onReady` hook to create your Socket server:
 ```typescript
 import {ServerLoader, ServerSettings, Inject} from "ts-express-decorators";
 import SocketService from "./services/SocketService";
+import Path = require("path");
 
+@ServerSettings({
+    rootDir: Path.resolve(__dirname)
+})
 class Server extends ServerLoader {
 
     @Inject()
