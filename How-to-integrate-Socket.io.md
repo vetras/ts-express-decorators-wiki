@@ -1,4 +1,4 @@
-[Home](https://github.com/Romakita/ts-express-decorators/wiki) > [Example](https://github.com/Romakita/ts-express-decorators/wiki/Example) > Socket.io
+[Home](https://github.com/Romakita/ts-express-decorators/wiki) > [Examples](https://github.com/Romakita/ts-express-decorators/wiki/Examples) > Socket.io
 
 ## Installation
 Run this command:
