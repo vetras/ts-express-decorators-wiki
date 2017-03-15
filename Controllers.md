@@ -14,7 +14,7 @@
 
 ## Installation
 You can adding the `controllers` folder on `mount` attribute in your server settings as follow :
-```
+```typescript
 import {ServerLoader, ServerSettings} from "ts-express-decorators";
 import Path = require("path");
 const rootDir = Path.resolve(__dirname);
