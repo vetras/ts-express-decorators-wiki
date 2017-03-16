@@ -113,7 +113,6 @@ describe('DbService :', () => {
 ```
 
 ### Testing controllers
-
 #### basic usage
 
 Use `ControllerService` to invoke your controller and test it:
@@ -192,9 +191,9 @@ describe('MyCtrl :', () => {
 
 ### Testing converters
 
-`Converters` let you to customize how [ConverterService](https://github.com/Romakita/ts-express-decorators/wiki/Converters) will deserialize a data for one or more types. This example show you the unit testing for the Array type. 
+`Converters` let you to customize how [ConverterService](https://github.com/Romakita/ts-express-decorators/wiki/Converters) will deserialize a data for one or more types. This example show you the unit test for the Array type. 
 
-The converter implementation in:
+The converter implementation in TsExpressDecorators for Array type is the following:
 ```typescript
 import ConverterService from "../services/converter";
 import {Converter} from "../decorators/converter";
@@ -225,7 +224,7 @@ export class ArrayConverter implements IConverter {
 }
 
 ```
-And the unit testing:
+And the unit test:
 ```typescript
 import {expect} from "chai";
 import {inject} from 'ts-express-decorators/testing';
