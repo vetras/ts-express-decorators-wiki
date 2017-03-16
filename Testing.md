@@ -95,7 +95,7 @@ Testing asynchronous method is also possible with `Done` function:
 ```typescript
 import {expect} from "chai";
 import {inject} from "ts-express-decorators/testing";
-import DbService from '../src/services/db';
+import DbService from "../services/db";
 
 describe('DbService :', () => {
 
@@ -108,6 +108,84 @@ describe('DbService :', () => {
                done();
            });
 
+    }));
+});
+```
+
+### Testing controllers
+
+#### basic usage
+
+Use `ControllerService` to invoke your controller and test it:
+```typescript
+import {expect} from "chai";
+import {inject} from "ts-express-decorators/testing";
+import MyCtrl from "../controllers/MyCtrl";
+
+describe('MyCtrl :', () => {
+
+    // bootstrap your Server to load all endpoints before run your test
+    beforeEach(bootstrap(Server));
+
+    it('should do something', inject([ControllerService], (controllerService: ControllerService) => {
+        
+        const instance: MyCtrl = controllerService.invoke<MyCtrl>(MyCtrl);
+
+        expect(!!instance).to.be.true;
+
+    }));
+});
+```
+
+#### Mock dependencies
+
+```typescript
+// in MyCtrl.ts
+import {Get, Controller} from "ts-express-decorators/testing";
+import DbService from "../services/DbService";
+import OtherService from "../services/OtherService";
+
+@Controller('/')
+export default class MyCtrl {
+   constructor(private dbService: DbService, private otherService: OtherService) {
+       
+   }
+
+   @Get('/')
+   public getData() {
+      return this.dbService.getList();
+   }
+}
+
+// in MyCtrl.spec.ts
+import {expect} from "chai";
+import {inject} from "ts-express-decorators/testing";
+import MyCtrl from "../controllers/MyCtrl";
+import DbService from "../services/DbService";
+
+describe('MyCtrl :', () => {
+
+    // bootstrap your Server to load all endpoints before run your test
+    beforeEach(bootstrap(Server));
+
+    it('should do something', inject([ControllerService], (controllerService: ControllerService) => {
+        
+        // create locals map
+        const locals = new Map<any, any>();
+        
+        // replace DbService by a faker
+        locals.set(DbService, {
+            getList: () => {
+               return "test";
+            }
+        })
+
+        // give the locals map to the invoke method
+        const instance: MyCtrl = controllerService.invoke<MyCtrl>(MyCtrl, locals);
+
+        // and test it
+        expect(!!instance).to.be.true;
+        expect(instance.getData()).to.equals("test");
     }));
 });
 ```
