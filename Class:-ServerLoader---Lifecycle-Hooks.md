@@ -153,11 +153,12 @@ By default, the decorator respond true for each incoming request. To change this
 ```typescript
 class Server extends ServerLoader {
     public $onAuth(request, response, next): void {
-        /// request.isAuthenticated() is provided by passport.js by you can implements other library
+        /// request.isAuthenticated() is provided by passport.js. You can implements other library
         next(request.isAuthenticated());
     }
 }
 ```
+
 > Note: Since 1.2.5 $onAuth hooks accept a fourth parameter named `autorization`.
 
 ```typescript
@@ -180,7 +181,7 @@ class MyCtrl {
 ```
 The object given to `@Authenticated` will be passed to `$onAuth` hook when a new request incoming on there route path and let you manage the user's role for example.
 
-See a complete integration example with [Passport.js](https://github.com/Romakita/example-ts-express-decorator/tree/master/).
+> See a complete integration example with [Passport.js](https://github.com/Romakita/example-ts-express-decorator/tree/master/).
 
 ***
 
