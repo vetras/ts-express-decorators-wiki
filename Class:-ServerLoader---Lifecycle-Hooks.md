@@ -180,7 +180,7 @@ class MyCtrl {
 ```
 The object given to `@Authenticated` will be passed to `$onAuth` hook when a new request incoming on there route path and let you manage the user's role for example.
 
-See a complete integration example with [Passport.js](https://github.com/Romakita/example-ts-express-decorator/tree/master/example-passport).
+See a complete integration example with [Passport.js](https://github.com/Romakita/example-ts-express-decorator/tree/master/).
 
 ***
 
