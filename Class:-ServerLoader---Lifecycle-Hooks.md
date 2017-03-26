@@ -148,11 +148,12 @@ class MyCtrl {
 }
 ```
 
-By default, the decorator respond true for each incoming request. To change this, you must implement your Authentification strategy by adding your method `$onAuth` on your Server:
+By default, the decorator respond true for each incoming request. To change this, you must implement your Authentification strategy by adding your method `$onAuth` on your Server (with Passport.js for example):
 
 ```typescript
 class Server extends ServerLoader {
     public $onAuth(request, response, next): void {
+        /// request.isAuthenticated() is provided by passport.js by you can implements other library
         next(request.isAuthenticated());
     }
 }
