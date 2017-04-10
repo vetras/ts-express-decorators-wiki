@@ -55,7 +55,7 @@ export default class SocketService {
           return this;
       }
 
-      public emit(...args) => this.io.emit(...args);
+      public emit = (...args) => this.io.emit(...args);
 
       createServer(httpServer: Http.Server)  {
            this.io = SocketIO(httpServer);
