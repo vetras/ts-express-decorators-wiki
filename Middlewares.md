@@ -19,7 +19,7 @@ All middlewares decorated by `@Middleware` or `@MiddlewareError` have one method
 ## Installation
 
 In first place, you must adding the `middlewares` folder on `componentsScan` attribute in your server settings as follow :
- 
+
 ```typescript
 import * as Express from "express";
 import {ServerLoader} from "ts-express-decorators";
@@ -37,8 +37,8 @@ const rootDir = Path.resolve(__dirname);
    ]
 })
 export class Server extends ServerLoader {
-   
-}       
+
+}
 ```
 In second place, create a new file in your middlewares folder. Create a new Class definition and add the `@Middleware()` or `@MiddlewareError()` annotations on your class.
 
@@ -57,7 +57,7 @@ Signature | Example | Description | Express analogue
 `@ResponseData()` | `useMethod(@ResponseData() data: any)` | Provide the data returned by the previous middlewares.
 `@EndpointInfo()` | `useMethod(@EndpointInfo() endpoint: Endpoint)` | Provide the endpoint settings.
 
-## Declaring a global middleware 
+## Declaring a global middleware
 
 Global middlewares and Endpoint middlewares are almost similar but Global middleware cannot use the `@EndpointInfo` decorator.
 Global middlewares let you to manage request and response on [`ServerLoader`](https://github.com/Romakita/ts-express-decorators/wiki/Class:-ServerLoader).
@@ -69,7 +69,7 @@ import {NotAcceptable} from "ts-httpexceptions";
 
 @Middleware()
 export default class GlobalAcceptMimesMiddleware implements IMiddleware {
-   
+
    constructor(private serverSettingsService: ServerSettingsService) {
 
    }
@@ -104,16 +104,17 @@ export class Server extends ServerLoader {
    $onMountingMiddlewares() {
        this.use(GlobalAcceptMimeMiddleware);
    }
-}       
+}
 ```
 ## Declaring a global error middleware
 
-`@MiddlewareError()` let you to handle all error when you add your middleware in you [ServerLoader]().
-It's new way (and recommanded) to handle errors.
+`@MiddlewareError()` let's you to handle all the errors when you add your middleware in your [ServerLoader]().
+It the recommended way to handle errors across your application.
 
-Create your middleware error:
+Create your error handler Middleware:
 ```typescript
-import {IMiddleware, MiddlewareError, Request, Response, Next, Err} from "ts-express-decorators";
+import { NextFunction as ExpressNext, Request as ExpressRequest, Response as ExpressResponse } from "express";
+import {IMiddlewareError, MiddlewareError, Request, Response, Next, Err} from "ts-express-decorators";
 import {Exception} from "ts-httpexceptions";
 import {$log} from "ts-log-debug";
 
@@ -122,9 +123,9 @@ export default class GlobalErrorHandlerMiddleware implements IMiddlewareError {
 
     use(
         @Err() error: any,
-        @Request() request: Express.Request,
-        @Response() response: Express.Response,
-        @Next() next: Express.NextFunction
+        @Request() request: ExpressRequest,
+        @Response() response: ExpressResponse,
+        @Next() next: ExpressNext
     ): any {
 
         if (response.headersSent) {
@@ -169,7 +170,7 @@ export class Server extends ServerLoader {
    $afterRoutesInit() {
        this.use(GlobalErrorHandlerMiddleware);
    }
-}       
+}
 ```
 
 ## Declaring a middleware for an endpoint
@@ -183,7 +184,7 @@ import {NotAcceptable} from "ts-httpexceptions";
 
 @Middleware()
 export default class AcceptMimesMiddleware implements IMiddleware {
-   
+
    constructor(private serverSettingsService: ServerSettingsService) {
 
    }
@@ -211,7 +212,7 @@ class MyCtrl {
    @Get('/')
    @UseBefore(AcceptMimesMiddleware)
    getContent() {}
-}     
+}
 ```
 
 ### Create your own decorator
@@ -248,7 +249,7 @@ import {NotAcceptable} from "ts-httpexceptions";
 @Middleware()
 export default class AcceptMimesMiddleware implements IMiddleware {
    use(@Request() request, @EndpointInfo() endpoint: Endpoint) {
-       
+
         // get the parameters stored for the current endpoint.
         const mimes = endpoint.getMetadata(AcceptMimeMiddleware) || [];
 
@@ -272,7 +273,7 @@ class MyCtrl {
    @Get('/')
    @AcceptMimes('application/json')
    getContent() {}
-}     
+}
 ```
 > Now our middleware is configurable via decorator !
 
@@ -294,7 +295,7 @@ export default class ResponseViewMiddleware implements IMiddleware {
 
     public use(
         @ResponseData() data: any, // handle the response data sent by the previous middleware
-        @EndpointInfo() endpoint: Endpoint,    
+        @EndpointInfo() endpoint: Endpoint,
         @Response() response: Express.Response
     ) {
         // prevent error when response is already sent
@@ -361,7 +362,7 @@ class MyCtrl {
    getContentHTML() {
       return {data: ... } // will stored to the responseData. Use @ResponseData to retrieve the stored data.
    }
-}  
+}
 ```
 ## Declaring an error middleware for an endpoint
 
@@ -403,7 +404,7 @@ export default class ErrorMiddleware implements IMiddlewareError {
         response.status(error.status || 500).send("Internal Error");
 
         return next();
-          
+
     }
 }
 ```
@@ -421,6 +422,6 @@ class MyCtrl {
    getContent() {
       throw NotFound('Content not found');
    }
-}     
+}
 ```
 
