@@ -8,6 +8,7 @@
   * [Testing controllers](https://github.com/Romakita/ts-express-decorators/wiki/Testing#testing-controllers)
   * [Testing converters](https://github.com/Romakita/ts-express-decorators/wiki/Testing#testing-converters)
   * [Testing middlewares](https://github.com/Romakita/ts-express-decorators/wiki/Testing#testing-middlewares)
+  * [Disable Logs](https://github.com/Romakita/ts-express-decorators/wiki/Testing#disable-logs)
 * [Test your REST API](https://github.com/Romakita/ts-express-decorators/wiki/Testing#test-your-rest-api)
   * [Installation](https://github.com/Romakita/ts-express-decorators/wiki/Testing#installation-1)
   * [Example](https://github.com/Romakita/ts-express-decorators/wiki/Testing#test-your-rest-api)
@@ -271,6 +272,24 @@ describe('AcceptMimesMiddleware :', () => {
         } as any, request as any);
 
     }));
+});
+```
+
+### Disable Logs
+
+If you like to disable log output for any reason, you can do it by calling `$log.stop();`.
+It is useful to suppress logging during unit tests runs so that your passed/failed test summary does not get polluted with information.
+
+```
+import { $log } from "ts-log-debug";
+
+describe('A test that will not print logs :', () => {
+
+    before(() => {
+        $log.stop();
+    });
+
+    /* you tests heres */
 });
 ```
 
